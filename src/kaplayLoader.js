@@ -14,12 +14,12 @@ export const k = kaplay({
 
 // โหลด asset ตรงนี้
 k.loadSprite("player", "./assets/sprites/jim.png", {
-    sliceX: 27,
+    sliceX: 28,
     sliceY: 1,
         anims: {
         idle: { from: 0, to: 10, loop: true, },
-        run:  { from: 11, to: 20, loop: true,},
-        jump: { from: 21, to: 26, loop: true,},
+        run:  { from: 11, to: 21, loop: true,},
+        jump: { from: 22, to: 27, loop: true,},
         fall: { from: 0, to: 0, loop: true, }, 
         explode: { from: 0, to: 0, loop: true, },
         attack: { from: 0, to: 0, loop: true, speed: 16 },
