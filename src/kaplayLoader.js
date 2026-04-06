@@ -48,13 +48,13 @@ k.loadSprite("burner", "./assets/sprites/burn3r.png", {
   },
 });
 
-k.loadSpriteAtlas("./assets/ui.png", {
+k.loadSpriteAtlas("./assets/healthbarui.png", {
   healthBar: {
-    x: 16,
-    y: 16,
-    width: 60,
-    height: 48,
-    sliceY: 3,
+    x: 0,
+    y: 0,
+    width: 96,
+    height: 80,
+    sliceY: 5,
   },
 });
     

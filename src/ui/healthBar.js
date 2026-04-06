@@ -7,13 +7,15 @@ function makeHealthBar(k) {
     k.sprite("healthBar", { frame: 0 }),
     k.fixed(),
     k.anchor("topleft"), 
-    k.pos(16, 16),
+    k.pos(80, 16),
     k.scale(4),
     {
       hpMapping: {
-        1: 2,
-        2: 1,
-        3: 0,
+        1: 4,
+        2: 3,
+        3: 2,
+        4: 1,
+        5: 0,
       },
       setEvents() {
         this.on("update", () => {
