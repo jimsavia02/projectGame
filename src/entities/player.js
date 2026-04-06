@@ -158,7 +158,7 @@ export function makePlayer(k) {
 
             const hitbox = this.add([
               k.pos(this.flipX ? -25 : 5, -10),
-              k.area({ shape: new k.Rect(k.vec2(0), 15, 10) }),
+              k.area({ shape: new k.Rect(k.vec2(0), 30, 30) }),
               "sword-hitbox",
             ]);
 

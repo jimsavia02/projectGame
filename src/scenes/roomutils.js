@@ -55,13 +55,13 @@ export function setMapColliders(k,map, colliders){
           k.sprite("alert"),
           k.pos(player.pos.x, player.pos.y - 50),
           k.anchor("center"),
-          k.scale(1.5),
+          k.scale(1),
           k.z(100), // ให้อยู่ข้างหน้าสุด
         ]);
 
         // ให้ Alert ขยับตามหัว Player (เผื่อตัวละครขยับจากแรงเฉื่อย)
         const updateAlert = k.onUpdate(() => {
-          alertIcon.pos = k.vec2(player.pos.x, player.pos.y - 50);
+          alertIcon.pos = k.vec2(player.pos.x, player.pos.y - 60);
         });
 
         // เล่นเสียงแจ้งเตือน (ถ้าต้องการ)

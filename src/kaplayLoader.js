@@ -26,7 +26,7 @@ k.loadSprite("player", "./assets/sprites/jim.png", {
     }
 });
 
-k.loadSprite("enemy1","./assets/sprites/covid001.png", 
+k.loadSprite("drone1","./assets/sprites/covid001.png", 
     {sliceX: 4,
         sliceY:4,
         anims: {

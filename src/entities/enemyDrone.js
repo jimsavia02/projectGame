@@ -6,7 +6,7 @@ export function makeDrone(k, initialPos) {
 
   return k.make([
     k.pos(initialPos),
-    k.sprite("enemy1", { anim: "flying" }),
+    k.sprite("drone1", { anim: "flying" }),
     k.area({ shape: new k.Rect(k.vec2(0, 6), 22, 20) }),
     k.anchor("center"),
     k.body(),
