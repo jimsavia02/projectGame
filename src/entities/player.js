@@ -27,7 +27,8 @@ export function makePlayer(k) {
       mana: 6,
       maxMana: 6,
       canDash: true,
-      dashCost: 1,
+      dashCost: 2,
+      skillCost: 3,
       dashCooldown: 0.5,
       dashSpeed: 400,
 
@@ -271,7 +272,7 @@ export function makePlayer(k) {
 
    //Skill 
    castSkill(){
-    if (!this.useMana(2)) return;
+    if (!this.useMana(this.skillCost)) return;
 
     const dir = this.flipX ?-1:1
    
