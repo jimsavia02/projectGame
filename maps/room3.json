@@ -142,42 +142,6 @@
                  "width":0,
                  "x":1160.33333333333,
                  "y":469.666666666667
-                }, 
-                {
-                 "height":0,
-                 "id":25,
-                 "name":"enemy1",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1240,
-                 "y":469.333333333333
-                }, 
-                {
-                 "height":0,
-                 "id":26,
-                 "name":"enemy1",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1305.33333333333,
-                 "y":468
-                }, 
-                {
-                 "height":0,
-                 "id":27,
-                 "name":"enemy1",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1362.66666666667,
-                 "y":472
                 }],
          "opacity":1,
          "type":"objectgroup",
