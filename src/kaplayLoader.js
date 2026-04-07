@@ -53,7 +53,7 @@ k.loadSpriteAtlas("./assets/healthbarui.png", {
     x: 0,
     y: 0,
     width: 96,
-    height: 80,
+    height: 240,
     sliceY: 5,
   },
 });
