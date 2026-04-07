@@ -24,6 +24,19 @@ export function makePlayer(k) {
       controlHandlers: [],
       walkSound: null,
       canControl: true,
+      mana: 6,
+      maxMana: 6,
+      canDash: true,
+      dashCost: 1,
+      dashCooldown: 0.5,
+      dashSpeed: 400,
+
+    useMana(cost) {
+      if (this.mana < cost) return false;
+     this.mana -= cost;
+       // TODO: update mana UI
+      return true;
+      },
 
       disableControl() {
         this.canControl = false;
@@ -116,6 +129,13 @@ export function makePlayer(k) {
       setControl() {
         this.controlHandlers = [];
 
+        this.controlHandlers.push(
+        k.onKeyPress("shift", () => {
+         if (!this.canControl) return;
+        this.dash();
+        })
+       );
+
         //skill
         this.controlHandlers.push(
   k.onKeyPress("c", () => {
@@ -163,7 +183,7 @@ export function makePlayer(k) {
             ]);
 
             // auto destroy hitbox
-            k.wait(0.1, () => {
+            k.wait(0.2, () => {
               if (hitbox.exists()) k.destroy(hitbox);
             });
           })
@@ -231,6 +251,7 @@ export function makePlayer(k) {
           })
         );
       },
+      
 
       disableControls() {
         this.controlHandlers.forEach((h) => h.cancel());
@@ -246,7 +267,10 @@ export function makePlayer(k) {
   this.use(k.doubleJump(2))    // ใส่ใหม่เป็น 2 jumps
 },
    castSkill(){
+    if (!this.useMana(2)) return;
+
     const dir = this.flipX ?-1:1
+   
 
     const Skill = this.add([
       k.sprite("fireball", { anim: "cast" }),
@@ -267,10 +291,39 @@ export function makePlayer(k) {
     }
   });
    },
+
+   //Dash
+   dash() {
+  if (!this.canDash) return;
+  if (!this.useMana(this.dashCost)) return;
+
+  this.canDash = false;
+
+  const dir = this.flipX ? -1 : 1;
+   
+  
+
+  this.vel.x = dir * 800;
+ console.log("dash")
+  k.wait(0.5, () => {
+    this.vel.x = 0;
+  
+
+  });
+
+  k.wait(this.dashCooldown, () => {
+    this.canDash = true;
+  });
+},
    
     },
+
+    
+    
     
 
   ]);
+
+  
 
 }
