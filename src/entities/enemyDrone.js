@@ -111,6 +111,8 @@ export function makeDrone(k, initialPos) {
         this.body?.pause?.();        // หยุดฟิสิกส์
       },
 
+      
+
     },
   ]);
 }

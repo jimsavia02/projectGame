@@ -134,14 +134,14 @@
                 {
                  "height":0,
                  "id":23,
-                 "name":"enemy1",
+                 "name":"Tree",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1160.33333333333,
-                 "y":469.666666666667
+                 "x":1152.33333333333,
+                 "y":449
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -172,7 +172,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":28,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

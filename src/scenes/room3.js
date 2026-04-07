@@ -6,6 +6,7 @@ import { state } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
+import { makeEnemyTree } from "../entities/enemyTree";
 
 export function room3(k,room3Data,previousSceneData) {
    
@@ -81,6 +82,17 @@ for (const position of positions) {
 
             enemy1.setBehavior();
             enemy1.setEvents();
+            continue;
+        }
+
+    if (position.name === "Tree") {
+
+            const Tree = k.add(
+                makeEnemyTree(k, k.vec2(position.x, position.y))
+            );
+
+            Tree.setBehavior();
+            Tree.setEvents();
             continue;
         }
 
