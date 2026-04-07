@@ -3,15 +3,7 @@ export function intro(k) {
   k.setBackground(k.rgb(0, 0, 0));
   const logo = k.add([
     
-    k.sprite("logo", {width:(1280),height:(720)}),
-      k.area(),
-    k.pos(k.width() / 2, k.height() / 2),
-    //k.pos(k.width() / 2, k.height() * 0.3),
-    k.anchor("center"),
-    k.scale(1),
-    k.rotate(0),
-    k.animate({ relative: true }),
-  
+
   ]);
 
 

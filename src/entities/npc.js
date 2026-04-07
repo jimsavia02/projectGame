@@ -8,9 +8,9 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
         k.pos(x, y),
         k.sprite("npc"),
         k.anchor("center"),
-        k.area({ shape: new k.Rect(k.vec2(0, 5), 25, 50) }),
+        k.area({ shape: new k.Rect(k.vec2(0, 40), 30, 50) }),
         k.body(), 
-        k.scale(1.5),
+        k.scale(1),
         "npc"
     ]);
 
@@ -20,7 +20,7 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
 
     npc.play("idle");
     // หันหน้าซ้ายขวา
-    //npc.flipX = true;
+    npc.flipX = true;
 
     // --- 1. สร้าง UI Dialog Box (ซ่อนไว้ก่อน) ---
     const dialogBox = k.add([
