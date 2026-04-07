@@ -266,7 +266,10 @@ export function makePlayer(k) {
       enableDoubleJump() {
   this.unuse("doubleJump")     // ลบของเดิม (1 jump)
   this.use(k.doubleJump(2))    // ใส่ใหม่เป็น 2 jumps
-},
+}, 
+
+
+   //Skill 
    castSkill(){
     if (!this.useMana(2)) return;
 
@@ -285,12 +288,15 @@ export function makePlayer(k) {
     ]);
 
     Skill.play("cast");
-
+    const spawnPos = Skill.pos;
       Skill.onUpdate(() => {
-    if (Skill.pos.x > 1000 || Skill.pos.x < -1000) {
-      Skill.destroy()
-    }
-  });
+    const distance = Skill.pos.dist(spawnPos);
+
+        // 🔥 ปรับระยะตรงนี้: 150 คือระยะพิกเซลที่สกิลจะบินไปได้
+        if (distance > 150) { 
+            Skill.destroy();
+        }
+    });
    },
 
    //Dash
