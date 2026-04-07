@@ -32,11 +32,12 @@ export function makePlayer(k) {
       dashSpeed: 400,
 
     useMana(cost) {
-      if (this.mana < cost) return false;
-     this.mana -= cost;
-       // TODO: update mana UI
-      return true;
-      },
+  if (this.mana < cost) return false;
+  this.mana -= cost;
+  state.set("playerMana", this.mana);
+  
+  return true;
+},
 
       disableControl() {
         this.canControl = false;

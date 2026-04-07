@@ -9,6 +9,7 @@ function initStateManager() {
     const state = {
         playerHp:5,
         maxPlayerHp: 5,
+        playerMana: 6,
         isDoubleJumpUnlocked: false,
         playerInBossFight: false,
         isBossDefeated: false,

@@ -7,6 +7,7 @@ import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
 import { makeEnemyTree } from "../entities/enemyTree";
+import { manaBar } from "../ui/manaBar";
 
 export function room3(k,room3Data,previousSceneData) {
    
@@ -132,6 +133,11 @@ for (const position of positions) {
    healthBar.setEvents();
        healthBar.trigger("update");
        k.add(healthBar);
+
+   manaBar.setEvents();
+   k.add(manaBar);
+   manaBar.trigger("update");
+
 
        k.onSceneLeave(() => {
     if (player.walkSound) {

@@ -48,7 +48,7 @@ k.loadSprite("burner", "./assets/sprites/burn3r.png", {
   },
 });
 
-k.loadSpriteAtlas("./assets/healthbarui.png", {
+k.loadSpriteAtlas("./assets/healthbarui2.png", {
   healthBar: {
     x: 0,
     y: 0,
@@ -68,6 +68,16 @@ k.loadSpriteAtlas("assets/animations.png", {
     anims: {
       default: { from: 0, to: 4, loop: true, speed: 7 },
     },
+  },
+});
+
+k.loadSpriteAtlas("./assets/manaUi.png", {
+  manaBar: {
+    x: 0,
+    y: 0,
+    width: 96,
+    height: 336,
+    sliceY: 7,
   },
 });
 
@@ -93,7 +103,7 @@ k.loadSprite("enemyTree","./assets/sprites/Golem.png",{
   sliceY:1,
   anims:{
     idle: { from:0,to : 7, loop:true},
-    explode: { from: 0, to: 7 },
+    explode: { from: 0, to: 1 },
   }
 })
 
