@@ -17,16 +17,17 @@ export function makeEnemyTree(k,initialPos){
          },
 
          setEvents(){
-            
+
             this.onCollide("sword-hitbox", () => {
           if (this.isDead) return;
           if (this.isDead || this.isInvincible) return;
           this.hurt(1);
           //console.log("Tree HP Remaining:", this.hp());
           this.isInvincible = true;
-    
+          this.opacity = 0.5;
           k.wait(0.2, () => {
           this.isInvincible = false;
+          this.opacity = 1;
           });
           });
 
