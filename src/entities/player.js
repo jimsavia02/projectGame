@@ -271,34 +271,56 @@ export function makePlayer(k) {
 
 
    //Skill 
-   castSkill(){
+
+castSkill() {
     if (!this.useMana(this.skillCost)) return;
 
-    const dir = this.flipX ?-1:1
-   
+    this.isAttacking = true;
+    this.play("cast");
 
-    const Skill = this.add([
-      k.sprite("fireball", { anim: "cast" }),
-      k.pos(dir *20,-10),
-      k.area({
-        shape: new k.Rect(k.vec2(0, 0), 10, 8)
-      }),
-      k.anchor("center"),
-      k.move(k.vec2(dir,0),200),
-      "player-skill"
-    ]);
+    let hasSpawned = false;
 
-    Skill.play("cast");
-    const spawnPos = Skill.pos;
-      Skill.onUpdate(() => {
-    const distance = Skill.pos.dist(spawnPos);
+    // ใช้ onUpdate เพื่อคอยเช็คเฟรมในทุกๆ Frame ของเกม
+    const checkFrame = this.onUpdate(() => {
+        // เช็คว่ากำลังเล่น Anims cast และถึงเฟรมสุดท้ายหรือยัง
+        if (this.curAnim() === "cast" && this.frame === 99 && !hasSpawned) {
+            hasSpawned = true; // กันการสร้างซ้ำ
 
-        // 🔥 ปรับระยะตรงนี้: 150 คือระยะพิกเซลที่สกิลจะบินไปได้
-        if (distance > 150) { 
-            Skill.destroy();
+            const dir = this.flipX ? -1 : 1;
+            
+            // สร้าง Fireball
+            const fireball = k.add([
+                k.sprite("fireball", { anim: "cast" }),
+                k.pos(this.pos.add(dir * 25, -8)),
+                k.area({ shape: new k.Rect(k.vec2(0, 13), 10, 8) }),
+                k.anchor("center"),
+                k.move(k.vec2(dir, 0), 300),
+                "player-skill"
+            ]);
+
+            const spawnPos = fireball.pos;
+            fireball.onUpdate(() => {
+                if (fireball.pos.dist(spawnPos) > 150) fireball.destroy();
+            });
+
+            // เมื่อปล่อยสกิลแล้ว เลิกเช็คเฟรมนี้
+            checkFrame.cancel();
         }
     });
-   },
+
+    // คืนค่าการควบคุมเมื่อแอนิเมชันจบ
+    const endHandler = this.onAnimEnd((anim) => {
+        if (anim === "cast") {
+            this.isAttacking = false;
+            if (k.isKeyDown("left") || k.isKeyDown("right")) {
+                this.play("run");
+            } else {
+                this.play("idle");
+            }
+            endHandler.cancel();
+        }
+    });
+},
 
    //Dash
    dash() {
@@ -308,6 +330,7 @@ export function makePlayer(k) {
   this.canDash = false;
 
   const dir = this.flipX ? -1 : 1;
+  this.play("dash");
    
   
 
@@ -315,6 +338,13 @@ export function makePlayer(k) {
  console.log("dash")
   k.wait(0.5, () => {
     this.vel.x = 0;
+    if (!this.isGrounded()) {
+        this.play("fall");
+    } else if (k.isKeyDown("left") || k.isKeyDown("right")) {
+        this.play("run");
+    } else {
+        this.play("idle");
+    }
   
 
   });
