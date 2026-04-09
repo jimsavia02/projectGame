@@ -9,7 +9,7 @@ export function makePlayer(k) {
     k.sprite("player"),
     k.z(10),
     //k.area({ shape: new k.Rect(k.vec2(-1, 0), 5, 5) }),
-    k.area({ shape: new k.Rect(k.vec2(-2, 0), 20, 50),collisionIgnore: ["npc"]
+    k.area({ shape: new k.Rect(k.vec2(0, 1), 10, 20),collisionIgnore: ["npc"]
      }),
     k.anchor("center"),
     k.body({ mass: 100, jumpForce: 400 }),
@@ -30,7 +30,7 @@ export function makePlayer(k) {
       dashCost: 2,
       skillCost: 3,
       dashCooldown: 0.5,
-      dashSpeed: 400,
+      dashSpeed: 100,
 
     useMana(cost) {
   if (this.mana < cost) return false;
@@ -311,7 +311,7 @@ export function makePlayer(k) {
    
   
 
-  this.vel.x = dir * 800;
+  this.vel.x = dir * 200;
  console.log("dash")
   k.wait(0.5, () => {
     this.vel.x = 0;

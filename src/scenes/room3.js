@@ -11,7 +11,7 @@ import { manaBar } from "../ui/manaBar";
 
 export function room3(k,room3Data,previousSceneData) {
    
-   k.camScale(1.8),
+   k.camScale(3),
    k.camPos(1280,720);
    k.setGravity(1000);
    
