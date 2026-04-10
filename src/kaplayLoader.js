@@ -23,6 +23,8 @@ k.loadSprite("player", "./assets/sprites/red.png", {
         fall: { from: 50, to: 56, loop: true, }, 
         explode: { from: 60, to: 69, loop: true, },
         attack: { from: 30, to: 36, loop: true, speed: 16 },
+        dash: { from: 70, to:85, loop:true,},
+        cast: {from:90,to:109, loop:false,speed: 20},
     }
 });
 
