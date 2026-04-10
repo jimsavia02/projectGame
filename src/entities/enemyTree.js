@@ -4,9 +4,9 @@ export function makeEnemyTree(k,initialPos){
         k.pos(initialPos),
         k.sprite("enemyTree",),
         k.anchor("center"),
-        k.area({ shape: new k.Rect(k.vec2(0, 5), 20, 20) }),
+        k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16) }),
         k.body({isStatic:false,mass: 100,}),
-        k.health(5),
+        k.health(5),  
         k.scale(),
         "Tree",{
         add() {
