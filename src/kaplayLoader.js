@@ -100,7 +100,7 @@ k.loadSprite("npc","./assets/sprites/npc1.png",
   }
      });
 
-k.loadSprite("enemyTree","./assets/box.png",{
+k.loadSprite("Box","./assets/box.png",{
   sliceX:1,
   sliceY:1,
   anims:{

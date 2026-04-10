@@ -6,7 +6,7 @@ import { state } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
-import { makeEnemyTree } from "../entities/enemyTree";
+import { makeBox } from "../entities/Box";
 import { manaBar } from "../ui/manaBar";
 
 export function room3(k,room3Data,previousSceneData) {
@@ -89,7 +89,7 @@ for (const position of positions) {
     if (position.name === "Tree") {
 
             const Tree = k.add(
-                makeEnemyTree(k, k.vec2(position.x, position.y))
+                makeBox(k, k.vec2(position.x, position.y))
             );
             continue;
         }
