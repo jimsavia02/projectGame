@@ -91,9 +91,6 @@ for (const position of positions) {
             const Tree = k.add(
                 makeEnemyTree(k, k.vec2(position.x, position.y))
             );
-
-            Tree.setBehavior();
-            Tree.setEvents();
             continue;
         }
 

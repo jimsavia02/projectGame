@@ -31,6 +31,7 @@ export function makePlayer(k) {
       skillCost: 3,
       dashCooldown: 0.5,
       dashSpeed: 100,
+      heldItem: null,
 
     useMana(cost) {
   if (this.mana < cost) return false;
@@ -150,7 +151,7 @@ export function makePlayer(k) {
         // Jump
         this.controlHandlers.push(
           k.onKeyPress("x", () => {
-            if (!this.canControl) return;
+            if (!this.canControl || this.grabTarget) return;
             this.doubleJump();
             if (this.curAnim() !== "jump") this.play("jump");
             if (this.walkSound) {
@@ -252,8 +253,49 @@ export function makePlayer(k) {
             }
           })
         );
+
+        // ปุ่ม V สำหรับจับ / ปล่อย
+        this.controlHandlers.push(
+         k.onKeyPress("v", () => {
+            if (!this.canControl) return;
+
+            if (!this.grabTarget) {
+              const trees = k.get("Tree");
+
+              let nearest = null;
+              let minDist = 40;
+
+              trees.forEach((t) => {
+                // ✅ กัน object หาย
+                if (!t.exists()) return;
+
+                const d = this.pos.dist(t.pos);
+                if (d < minDist && !t.isGrabbed) {
+                  nearest = t;
+                  minDist = d;
+                }
+              });
+
+              if (nearest) {
+                this.grabTarget = nearest;
+
+                nearest.isGrabbed = true;
+                nearest.grabber = this;
+
+                nearest.body?.pause?.();
+              }
+            } 
+            else {
+              if (this.grabTarget && this.grabTarget.exists()) {
+                this.grabTarget.isGrabbed = false;
+                this.grabTarget.grabber = null;
+                this.grabTarget.body?.unpause?.();
+              }
+              this.grabTarget = null;
+            }
+          })
+        );
       },
-      
 
       disableControls() {
         this.controlHandlers.forEach((h) => h.cancel());
