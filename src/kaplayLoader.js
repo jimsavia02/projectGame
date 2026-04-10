@@ -100,11 +100,11 @@ k.loadSprite("npc","./assets/sprites/npc1.png",
   }
      });
 
-k.loadSprite("enemyTree","./assets/sprites/Golem.png",{
-  sliceX:8,
+k.loadSprite("enemyTree","./assets/box.png",{
+  sliceX:1,
   sliceY:1,
   anims:{
-    idle: { from:0,to : 7, loop:true},
+    idle: { from:0,to : 0, loop:true},
     explode: { from: 0, to: 1 },
   }
 })

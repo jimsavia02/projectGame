@@ -2,12 +2,12 @@ export function makeEnemyTree(k,initialPos){
 
     return k.make([
         k.pos(initialPos),
-        k.sprite("enemyTree",{anim: "idle"}),
+        k.sprite("enemyTree",),
         k.anchor("center"),
-        k.area({ shape: new k.Rect(k.vec2(0, 5), 20, 50) }),
-        k.body({isStatic:true}),
+        k.area({ shape: new k.Rect(k.vec2(0, 5), 20, 20) }),
+        k.body({isStatic:false,mass: 100,}),
         k.health(5),
-        k.scale(2),
+        k.scale(),
         "Tree",{
         add() {
         this.flipX = true
