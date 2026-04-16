@@ -1,4 +1,4 @@
-import { makeBoss } from "../entities/enemyBoss";
+import { makeBoss } from "../entities/Boss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
 import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones} from "./roomutils";
@@ -138,6 +138,12 @@ for (const position of positions) {
                     continue;
                 }
 
+        if (position.name === "boss") {
+    // ✅ เรียกใช้ลอยๆ ได้เลย เพราะข้างในมี k.add() อยู่แล้ว
+    const boss = makeBoss(k, k.vec2(position.x, position.y)); 
+    
+    continue;
+}
     
 
   

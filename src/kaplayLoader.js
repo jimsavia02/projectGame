@@ -23,7 +23,7 @@ k.loadSprite("player", "./assets/sprites/red.png", {
         fall: { from: 50, to: 56, loop: true, }, 
         explode: { from: 60, to: 69, loop: true, },
         attack: { from: 30, to: 36, loop: false, speed: 16 },
-        dash: { from: 70, to:85, loop:true,},
+        dash: { from: 70, to:85, loop:false,},
         cast: {from:90,to:109, loop:false,speed: 20},
     }
 });
@@ -129,6 +129,35 @@ k.loadSprite("switch","./assets/switch.png",{
   }
 });
 
+k.loadSprite("boss", "assets/sprites/boss.png", {
+    sliceX: 8, // คอลัมน์ (นับแนวนอน)
+    sliceY: 8, // แถว (นับแนวตั้ง - รูปนี้มี 8 แถว)
+
+    anims: {
+        // แถวที่ 1: Idle
+        idle: { from: 0, to: 7, loop: true, speed: 8 },
+        // แถวที่ 2: Walk
+        walk: { from: 8, to: 15, loop: true, speed: 10 },
+        // แถวที่ 3: Attack
+        attack: { from: 16, to: 23, loop: false, speed: 12 },
+        // แถวที่ 4-5: การร่ายเวทย์และการกลายร่าง (ในรูปคือเฟรม 24-39)
+        cast: { from: 24, to: 31, loop: false, speed: 10 },
+        // แถวที่ 6: ท่าเตรียมร่าย (ยกมือ)
+        prepare: { from: 40, to: 47, loop: false, speed: 10 },
+        // แถวที่ 5: Death (การสลายตัว) - ตามรูปจริงน่าจะเริ่มที่เฟรม 32 หรือแถวที่ 5
+        death: { from: 32, to: 39, loop: false, speed: 8 },
+    },
+});
+k.loadSprite("spell_vortex", "assets/sprites/boss.png", {
+    sliceX: 8,
+    sliceY: 8,
+    anims: {
+        // แถว 7: วงเวทย์ม่วงๆ ที่พื้น (Vortex)
+        vortex: { from: 48, to: 51, loop: true, speed: 10 }, 
+        // แถว 7-8: เวทย์ตกลงมาหรือระเบิดขึ้น (Fall/Explosion)
+        fall: { from: 52, to: 63, loop: false, speed: 15 },
+    },
+});
 
 
 k.loadSprite("bgroom1", "assets/sprites/bts.png");
