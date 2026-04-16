@@ -120,6 +120,16 @@ k.loadSprite("door","./assets/door.png"),{
   }
 }
 
+k.loadSprite("switch","./assets/switch.png",{
+  sliceX:2,
+  sliceY:1,
+  anims:{
+    idle: { from:0,to:0,},
+    active: { from: 1,to:1,},
+  }
+});
+
+
 
 k.loadSprite("bgroom1", "assets/sprites/bts.png");
 

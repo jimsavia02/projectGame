@@ -764,18 +764,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":131,
-                 "name":"Tree",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":455.5,
-                 "y":398.5
-                }, 
-                {
-                 "height":0,
                  "id":132,
                  "name":"Tree",
                  "point":true,
@@ -809,6 +797,18 @@
                  "width":0,
                  "x":544,
                  "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":150,
+                 "name":"switch",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":512
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1916,7 +1916,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1943,7 +1943,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":150,
+ "nextobjectid":151,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -1976,6 +1976,19 @@
         {
          "firstgid":13361,
          "source":"other_and_decorative.tsx"
+        }, 
+        {
+         "columns":17,
+         "firstgid":14961,
+         "image":"..\/assets\/Tilesetv3.png",
+         "imageheight":832,
+         "imagewidth":272,
+         "margin":0,
+         "name":"Tilesetv3",
+         "spacing":0,
+         "tilecount":884,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",

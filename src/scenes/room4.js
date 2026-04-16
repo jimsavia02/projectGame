@@ -7,6 +7,9 @@ import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
 import { makeDoor } from "../entities/door"
+import { makeSwitch } from "../entities/switch";
+import { makeDoor2 } from "../entities/door2";
+import { makeBox } from "../entities/Box";
 
 export function room4(k,room4Data,previousSceneData) {
    
@@ -110,14 +113,32 @@ for (const position of positions) {
         }
 
     if (position.name === "door2") {
-            // สร้าง object ประตูขึ้นมา
-            const door = makeDoor(k, k.vec2(position.x, position.y));
+            const door = makeDoor2(k, k.vec2(position.x, position.y));
             
          
             k.add(door); 
             
             continue;
         }
+        if (position.name === "switch") {
+            // รอให้ Loop ทำงานไปเรื่อยๆ จนเจอ door ก่อน หรือใช้ k.onUpdate
+            // แต่ทางที่ปลอดภัยที่สุดคือสร้าง Switch หลังจาก Loop ประตูเสร็จ
+            // หรือเขียนแบบนี้:
+        
+                k.add(makeSwitch(k, k.vec2(position.x, position.y)));
+          
+            continue;
+        }
+
+        if (position.name === "Tree") {
+        
+                    const Tree = k.add(
+                        makeBox(k, k.vec2(position.x, position.y))
+                    );
+                    continue;
+                }
+
+    
 
   
 }
