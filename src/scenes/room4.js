@@ -109,6 +109,16 @@ for (const position of positions) {
             continue;
         }
 
+    if (position.name === "door2") {
+            // สร้าง object ประตูขึ้นมา
+            const door = makeDoor(k, k.vec2(position.x, position.y));
+            
+         
+            k.add(door); 
+            
+            continue;
+        }
+
   
 }
 
