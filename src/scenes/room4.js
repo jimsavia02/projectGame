@@ -6,6 +6,7 @@ import { state } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
+import { makeBox } from "../entities/Box";
 
 export function room4(k,room4Data,previousSceneData) {
    
@@ -17,10 +18,13 @@ export function room4(k,room4Data,previousSceneData) {
    const roomLayers = room4Data.layers;
    const map = k.add([k.pos(0,0), k.sprite("room4")]);
 
+
        const colliders = [];
+       const spikes = [];
        const positions = [];
        const cameras = [];  
        const exits = [];
+       
       
 
    
@@ -42,9 +46,10 @@ export function room4(k,room4Data,previousSceneData) {
            if (layer.name === "colliders") {
                colliders.push(...layer.objects);
            }
-           
-           
 
+           if (layer.name === "spikes") {
+                spikes.push(...layer.objects);
+           }
        }
 
        
@@ -57,15 +62,24 @@ export function room4(k,room4Data,previousSceneData) {
        setCameraControls(k,player,map, room4Data);
        setExitZones(k, map, exits, "room3");
 
-           // ... (โค้ดส่วนบนอื่นๆ)
+       for (const spike of spikes) {
+      k.add([
+        k.rect(spike.width, spike.height),
+        k.pos(spike.x, spike.y),
+        k.area(),
+        k.opacity(0),
+        "spike",
+    ]);
+  }
+        k.onCollide("player", "spike", (player) => {
+        player.hurt(5); // ลด HP เมื่อชนกับ หนาม
+    });
+
 
 // ✅ 1. หาบรรทัดที่วนลูปตำแหน่ง (positions)
 let spawned = false;
 
 for (const position of positions) {
-
-  console.log("🔥 positions:", positions);
-  console.log("👉 exitName:", previousSceneData?.exitName);
 
   if (position.name === "player" && !previousSceneData?.exitName) {
     player.setPosition(position.x, position.y);
@@ -73,13 +87,17 @@ for (const position of positions) {
     spawned = true;
     continue;
   }
+  if (position.name === "Tree") {      
+    const Tree = k.add(
+    makeBox(k, k.vec2(position.x, position.y))
+    );
+    continue;
+}
 
   if (
     position.name.includes("entrance-4") &&
     previousSceneData?.exitName === "exit-4"
   ) {
-    console.log("✅ เข้า entrance-4 แล้ว");
-
     player.setPosition(position.x, position.y + 20);
     player.setControl();
     spawned = true;
@@ -116,8 +134,7 @@ if (!spawned) {
     if (player.walkSound) {
         player.walkSound.stop();
         player.walkSound = null;
-    }
-});
-
-
+      }
+  });
 }
+
