@@ -687,7 +687,7 @@
         {
          "draworder":"topdown",
          "id":12,
-         "name":"position",
+         "name":"positions",
          "objects":[
                 {
                  "height":0,
@@ -699,8 +699,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":108.875,
-                 "y":129.625
+                 "x":109.375,
+                 "y":130.625
                 }],
          "opacity":1,
          "type":"objectgroup",

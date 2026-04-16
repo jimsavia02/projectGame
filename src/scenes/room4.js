@@ -64,7 +64,7 @@ let spawned = false;
 
 for (const position of positions) {
 
-  onsole.log("🔥 positions:", positions);
+  console.log("🔥 positions:", positions);
   console.log("👉 exitName:", previousSceneData?.exitName);
 
   if (position.name === "player" && !previousSceneData?.exitName) {
