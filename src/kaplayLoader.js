@@ -111,6 +111,14 @@ k.loadSprite("Box","./assets/box.png",{
     explode: { from: 0, to: 1 },
   }
 })
+k.loadSprite("door","./assets/door.png"),{
+  sliceX:1,
+  sliceY:1,
+  anims:{
+    idle: { from:0,to : 0, loop:true},
+    explode: { from: 0, to: 0 },
+  }
+}
 
 
 k.loadSprite("bgroom1", "assets/sprites/bts.png");
