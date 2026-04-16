@@ -57,8 +57,8 @@ k.loadSpriteAtlas("./assets/healthbarui2.png", {
   healthBar: {
     x: 0,
     y: 0,
-    width: 96,
-    height: 240,
+    width: 191,
+    height: 320,
     sliceY: 5,  
   },
 });

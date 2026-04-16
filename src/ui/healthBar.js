@@ -8,7 +8,7 @@ function makeHealthBar(k) {
     k.fixed(),
     k.anchor("topleft"), 
     k.pos(80, 16),
-    k.scale(3),
+    k.scale(2),
     {
       hpMapping: {
         1: 4,
