@@ -5,12 +5,14 @@ import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls,
 import { state } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
+import { manaBar } from "../ui/manaBar";
 import { makeNPC } from "../entities/npc"
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 import { makeDoor2 } from "../entities/door2";
 import { makeBox } from "../entities/Box";
 import { loadSpikes, setupSpikeDamage } from "../entities/spike";
+
 
 export function room4(k,room4Data,previousSceneData) {
    
@@ -60,7 +62,7 @@ export function room4(k,room4Data,previousSceneData) {
        setCameraZones(k,map,cameras);
        setCameraControls(k,player,map, room4Data);
        setupSpikeDamage(k);
-       setExitZones(k, map, exits, "room3");
+       setExitZones(k, map, exits,);
        loadSpikes(k, map, spikes);
 
            // ... (โค้ดส่วนบนอื่นๆ)
@@ -79,15 +81,13 @@ for (const position of positions) {
   }
 
   if (
-    position.name.includes("entrance-4") &&
-    previousSceneData?.exitName === "exit-4"
-  ) {
-
-    player.setPosition(position.x, position.y + 20);
+  position.name === previousSceneData?.exitName?.replace("exit", "entrance")
+    ) {
+    player.setPosition(position.x, position.y);
     player.setControl();
     spawned = true;
     continue;
-  }
+    }
 
   if (
     position.name.includes("entrance-4") &&
@@ -156,9 +156,12 @@ if (!spawned) {
         loop: true,   // ให้เล่นวนซ้ำไปเรื่อยๆ
     });
 
-   healthBar.setEvents();
-       healthBar.trigger("update");
-       k.add(healthBar);
+    healthBar.setEvents();
+        healthBar.trigger("update");
+        k.add(healthBar);
+    manaBar.setEvents();
+        k.add(manaBar);
+        manaBar.trigger("update");
 
        k.onSceneLeave(() => {
     if (player.walkSound) {

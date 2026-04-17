@@ -181,5 +181,7 @@ k.loadSprite("room1","./maps/room1.png");
 k.loadSprite("room2","./maps/room2.png");
 k.loadSprite("room3","./maps/room3.png");
 k.loadSprite("room4","./maps/room4.png");
+k.loadSprite("room5", "maps/room5.png");
+k.loadJSON("room5Data", "maps/room5.json");
 
 

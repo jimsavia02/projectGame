@@ -257,7 +257,7 @@ cameraZone.onCollide("player", () => {
   }
 }
 
-export function setExitZones(k,map,exits, destinationName){
+export function setExitZones(k,map,exits,){
   for(const exit of exits){
     const exitZone = map.add([k.pos(exit.x,exit.y),
       k.pos(exit.x, exit.y),
@@ -289,7 +289,11 @@ export function setExitZones(k,map,exits, destinationName){
         return;
       }
 
-      k.go(destinationName, { exitName: exit.name });
+      const targetRoom = exit.name.replace("exit-", "room");
+
+k.go(targetRoom, {
+  exitName: exit.name,
+});
     });
 
   }

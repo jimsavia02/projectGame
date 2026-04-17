@@ -1032,19 +1032,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":36,
-                 "name":"player",
-                 "opacity":1,
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1502.33333333333,
-                 "y":120.666666666666
-                }, 
-                {
-                 "height":0,
                  "id":97,
                  "name":"Tree",
                  "opacity":1,
@@ -1120,7 +1107,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],

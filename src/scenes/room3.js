@@ -140,8 +140,6 @@ for (const position of positions) {
     if (player.walkSound) {
         player.walkSound.stop();
         player.walkSound = null;
-    }
-});
-
-
+        }
+    });
 }
