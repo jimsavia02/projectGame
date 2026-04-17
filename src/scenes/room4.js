@@ -10,14 +10,15 @@ import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 import { makeDoor2 } from "../entities/door2";
 import { makeBox } from "../entities/Box";
+import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 
 export function room4(k,room4Data,previousSceneData) {
    
    k.camScale(1.8),
    k.camPos(1280,720);
    k.setGravity(1000);
-   
-
+    
+   const spikesLayer = room4Data.layers.find(l => l.name === "spikes");
    const roomLayers = room4Data.layers;
    const map = k.add([k.pos(0,0), k.sprite("room4")]);
 
@@ -25,6 +26,7 @@ export function room4(k,room4Data,previousSceneData) {
        const positions = [];
        const cameras = [];  
        const exits = [];
+       const spikes = [];
       
 
    
@@ -46,14 +48,10 @@ export function room4(k,room4Data,previousSceneData) {
            if (layer.name === "colliders") {
                colliders.push(...layer.objects);
            }
-           
-        
-           
-           
-
+           if (layer.name === "spikes" && layer.objects) {
+                spikes.push(...layer.objects);
+            }
        }
-
-       
 
          setMapColliders(k, map, colliders);
 
@@ -61,7 +59,9 @@ export function room4(k,room4Data,previousSceneData) {
        player.play("idle"); 
        setCameraZones(k,map,cameras);
        setCameraControls(k,player,map, room4Data);
+       setupSpikeDamage(k);
        setExitZones(k, map, exits, "room3");
+       loadSpikes(k, map, spikes);
 
            // ... (โค้ดส่วนบนอื่นๆ)
 
@@ -70,8 +70,6 @@ let spawned = false;
 
 for (const position of positions) {
 
-  console.log("🔥 positions:", positions);
-  console.log("👉 exitName:", previousSceneData?.exitName);
 
   if (position.name === "player" && !previousSceneData?.exitName) {
     player.setPosition(position.x, position.y);
@@ -84,7 +82,6 @@ for (const position of positions) {
     position.name.includes("entrance-4") &&
     previousSceneData?.exitName === "exit-4"
   ) {
-    console.log("✅ เข้า entrance-4 แล้ว");
 
     player.setPosition(position.x, position.y + 20);
     player.setControl();
@@ -148,8 +145,6 @@ for (const position of positions) {
 
   
 }
-
-
 
 // 🔥 ต้องอยู่นอก loop เท่านั้น
 if (!spawned) {

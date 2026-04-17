@@ -18,6 +18,7 @@ export function makePlayer(k) {
 
     {
       speed: 150,
+      canBeHit: true,
       isAttacking: false,
       controlHandlers: [],
       walkSound: null,
@@ -73,7 +74,11 @@ export function makePlayer(k) {
         });
 
         this.on("hurt", () => {
+          this.canBeHit = true;
           makeBlink(k, this);
+          if (this.hp() <= 0) {
+            this.isDead = true;
+          }
           if (this.hp() > 0) {
             state.set(statePropsEnum.playerHp, this.hp());
             healthBar.trigger("update");
