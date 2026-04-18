@@ -7,6 +7,7 @@ export function makeBox(k, initialPos) {
     k.body({ isStatic: false, mass: 100 }),
     k.health(5),
     k.scale(),
+     k.z(10),
     "Tree",
 
     {

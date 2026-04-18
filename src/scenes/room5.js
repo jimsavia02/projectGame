@@ -2,6 +2,7 @@ import { makeBoss } from "../entities/enemyBoss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
 import { setCameraZones, setMapColliders, setCameraControls, setExitZones } from "./roomutils";
+import { state } from "../state/globalState";
 import { makeNPC } from "../entities/npc";
 import { makeBox } from "../entities/Box";
 import { healthBar } from "../ui/healthBar";
@@ -64,6 +65,9 @@ export function room5(k, room5Data, previousSceneData) {
       if (!previousSceneData?.exitName) {
         player.setPosition(position.x, position.y);
         player.setControl();
+        // Set respawn position
+        state.set("currentRoom", "room5");
+        state.set("respawnPos", { x: position.x, y: position.y });
         continue;
       }
     }
@@ -74,6 +78,25 @@ export function room5(k, room5Data, previousSceneData) {
     ) {
       player.setPosition(position.x, position.y);
       player.setControl();
+      // Set respawn position
+      state.set("currentRoom", "room5");
+      state.set("respawnPos", { x: position.x, y: position.y });
+      continue;
+    }
+
+    if (previousSceneData?.exitName === "respawn" && previousSceneData?.respawnPos) {
+      player.setPosition(previousSceneData.respawnPos.x, previousSceneData.respawnPos.y);
+      // Reset player state
+      player.vel = k.vec2(0, 0);
+      player.play("idle");
+      player.flipX = false;
+      player.isAttacking = false;
+      player.disableControls();
+      player.setControl();
+      // Update respawn position and health
+      state.set("playerHp", state.current().maxPlayerHp);
+      healthBar.trigger("update");
+      k.camPos(player.pos);
       continue;
     }
 

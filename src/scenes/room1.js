@@ -67,9 +67,29 @@ export function room1(k, roomData,previousSceneData) {
             player.setPosition(position.x, position.y);
             player.setControl();
             player.respawnIfOutOfBounds(1000, "room1");
+            // Set respawn position
+            state.set("currentRoom", "room1");
+            state.set("respawnPos", { x: position.x, y: position.y });
             continue;
             
             
+        }
+
+        if (previousSceneData?.exitName === "respawn" && previousSceneData?.respawnPos) {
+            player.setPosition(previousSceneData.respawnPos.x, previousSceneData.respawnPos.y);
+            // Reset player state
+            player.vel = k.vec2(0, 0);
+            player.play("idle");
+            player.flipX = false;
+            player.isAttacking = false;
+            player.disableControls();
+            player.setControl();
+            player.respawnIfOutOfBounds(1000, "room1");
+            // Update respawn position and health
+            state.set("playerHp", state.current().maxPlayerHp);
+            healthBar.trigger("update");
+            k.camPos(player.pos);
+            return;
         }
 
         if (
@@ -79,6 +99,9 @@ export function room1(k, roomData,previousSceneData) {
       player.setPosition(position.x, position.y);
       player.setControl();
       player.respawnIfOutOfBounds(1000, "room1");
+      // Set respawn position
+      state.set("currentRoom", "room1");
+      state.set("respawnPos", { x: position.x, y: position.y });
       k.camPos(player.pos);
       continue;
     }
@@ -90,6 +113,9 @@ export function room1(k, roomData,previousSceneData) {
       player.setPosition(position.x, position.y);
       player.setControl();
       player.respawnIfOutOfBounds(1000, "room1");
+      // Set respawn position
+      state.set("currentRoom", "room1");
+      state.set("respawnPos", { x: position.x, y: position.y });
       k.camPos(player.pos);
       continue;
     }

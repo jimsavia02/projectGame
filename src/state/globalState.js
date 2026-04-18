@@ -3,6 +3,8 @@ export const statePropsEnum = {
     isDoubleJumpUnlocked: "isDoubleJumpUnlocked",
     playerIsInBossFight: "playerIsInBossFight",
     isBossDefeated: "isBossDefeated",
+    currentRoom: "currentRoom",
+    respawnPos: "respawnPos",
 };
 
 function initStateManager() {
@@ -13,6 +15,8 @@ function initStateManager() {
         isDoubleJumpUnlocked: false,
         playerInBossFight: false,
         isBossDefeated: false,
+        currentRoom: "room1",
+        respawnPos: { x: 0, y: 0 },
     };
 
     return {

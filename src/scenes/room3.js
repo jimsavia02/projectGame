@@ -73,6 +73,9 @@ for (const position of positions) {
         if (!previousSceneData?.exitName) {
             player.setPosition(position.x, position.y);
             player.setControl(); // 🔥 บรรทัดนี้จะทำให้กดเดินได้
+            // Set respawn position
+            state.set("currentRoom", "room3");
+            state.set("respawnPos", { x: position.x, y: position.y });
             continue; 
         }   
     }
@@ -103,8 +106,27 @@ for (const position of positions) {
         ) {
         player.setPosition(position.x, position.y);
         player.setControl();
+        // Set respawn position
+        state.set("currentRoom", "room3");
+        state.set("respawnPos", { x: position.x, y: position.y });
         continue;
         }
+
+    if (previousSceneData?.exitName === "respawn" && previousSceneData?.respawnPos) {
+        player.setPosition(previousSceneData.respawnPos.x, previousSceneData.respawnPos.y);
+        // Reset player state
+        player.vel = k.vec2(0, 0);
+        player.play("idle");
+        player.flipX = false;
+        player.isAttacking = false;
+        player.disableControls();
+        player.setControl();
+        // Update respawn position and health
+        state.set("playerHp", state.current().maxPlayerHp);
+        healthBar.trigger("update");
+        k.camPos(player.pos);
+        continue;
+    }
     if (position.name === "npc") {
     makeNPC(
         k,

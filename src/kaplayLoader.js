@@ -28,17 +28,26 @@ k.loadSprite("player", "./assets/sprites/red.png", {
     }
 });
 
-k.loadSprite("drone1","./assets/sprites/SkeletonUN.png", 
-    {sliceX: 6,
-        sliceY:5,
+k.loadSprite("drone1","./assets/sprites/Soldier.png", 
+    {sliceX: 9,
+        sliceY:7,
         anims: {
             idle :{ from: 0, to:5, loop:true,},
-            walk :{ from: 6,to: 11, loop:true},
-            run:{ from :12, to: 17, loop:true},
+            walk :{ from: 9,to: 16, loop:true},
+            run:{ from :9, to: 16, loop:true},
             attack :{ from: 18, to: 23, loop:false,},
-            hurt:{ from: 24,to:25, loop:true ,speed: 1},
-            explode :{ from: 24, to:25,loop:false},
+            attack2 :{ from: 27, to: 32, loop:false,},
+            attack3 :{ from: 37, to: 45, loop:false,speed:10},
+            hurt:{ from: 46,to:48, loop:false ,},
+            explode :{ from: 54, to:57,loop:false},
     }});
+k.loadSprite("arrow","./assets/sprites/arrow.png",{
+  sliceX: 1,
+  sliceY:1,
+  anims: {
+    projectile: {from: 0,to:0,loop:true},
+  },
+});
 
 k.loadSprite("burner", "./assets/sprites/burn3r.png", {
   sliceX: 5,

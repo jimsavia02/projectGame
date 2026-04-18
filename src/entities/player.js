@@ -91,7 +91,10 @@ export function makePlayer(k) {
         // 🔥 แก้ไข: จัดการตอนจบ Anim
         this.onAnimEnd((anim) => {
           if (anim === "explode") {
-            k.go("room3", { exitName: null });
+            // Respawn at the current room's respawn position
+            const currentRoom = state.current().currentRoom;
+            const respawnPos = state.current().respawnPos;
+            k.go(currentRoom, { exitName: "respawn", respawnPos: respawnPos });
           }
           // เมื่อตีจบ ให้กลับสถานะปกติทันที
           if (anim === "attack") {
