@@ -10,6 +10,8 @@ import { makeBox } from "../entities/Box";
 import { manaBar } from "../ui/manaBar";
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
+import { makeKey } from "../entities/key";
+
 
 export function room3(k,room3Data,previousSceneData) {
    
@@ -95,8 +97,15 @@ for (const position of positions) {
             );
             continue;
         }
+      if (position.name === "key") {
 
-    // --- โค้ดเดิมของคุณที่มีอยู่แล้ว ---
+            const Tree = k.add(
+                makeKey(k, k.vec2(position.x, position.y))
+            );
+            continue;
+        }
+
+
     if (
     position.name === "entrance-3" &&
         previousSceneData?.exitName === "exit-3"

@@ -983,6 +983,17 @@
                  "width":16,
                  "x":1184,
                  "y":256
+                }, 
+                {
+                 "height":128,
+                 "id":188,
+                 "name":"barrier2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1536,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1102,6 +1113,18 @@
                  "width":0,
                  "x":129.25,
                  "y":345.5
+                }, 
+                {
+                 "height":0,
+                 "id":189,
+                 "name":"key",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":432,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1132,7 +1155,7 @@
          "y":0
         }],
  "nextlayerid":27,
- "nextobjectid":184,
+ "nextobjectid":190,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -175,6 +175,46 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
     k.onKeyPress("e", () => {
         if (!canTalk) return;
 
+        // ✅ ตรวจสอบว่า player ถือ key หรือไม่
+        if (player.grabTarget && player.grabTarget.is("key")) {
+            // Player ถือ key → ทำลาย barrier2 และ key
+            const barriers2 = k.get("barrier2");
+            for (const barrier of barriers2) {
+                if (barrier.exists()) {
+                    k.tween(
+                        barrier.opacity,
+                        0,
+                        0.5,
+                        (val) => (barrier.opacity = val),
+                        k.easings.linear
+                    );
+                    k.wait(0.5, () => {
+                        if (barrier.exists()) {
+                            barrier.unuse(k.body());
+                            k.destroy(barrier);
+                        }
+                    });
+                }
+            }
+            // ทำลาย key ที่ player กำลังถือ
+            if (player.grabTarget.exists()) {
+                k.destroy(player.grabTarget);
+                player.grabTarget = null;
+            }
+            // แสดง dialog สำเร็จ
+            isTalking = true;
+            dialogBox.opacity = 0.9;
+            content.text = "Thank you! The barrier is now removed!";
+            k.wait(2, () => {
+                dialogBox.opacity = 0;
+                isTalking = false;
+                dialogIndex = 0;
+                content.text = "";
+                player.enableControl();
+            });
+            return;
+        }
+
         isTalking = true;
         dialogBox.opacity = 0.9; // แสดงกล่อง (เกือบชัด)
 

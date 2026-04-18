@@ -138,6 +138,14 @@ k.loadSprite("switch","./assets/switch.png",{
   }
 });
 
+k.loadSprite("key","./assets/key.png",{
+  sliceX: 1,
+  sliceY:1,
+  anims: {
+    projectile: {from: 0,to:0,loop:true},
+  },
+});
+
 k.loadSprite("boss", "assets/sprites/boss.png", {
     sliceX: 8, // คอลัมน์ (นับแนวนอน)
     sliceY: 8, // แถว (นับแนวตั้ง - รูปนี้มี 8 แถว)

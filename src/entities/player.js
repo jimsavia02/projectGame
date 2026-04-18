@@ -119,7 +119,7 @@ export function makePlayer(k) {
         }));
 
         this.controlHandlers.push(k.onKeyPress("x", () => {
-          if (!this.canControl || this.grabTarget) return;
+          if (!this.canControl) return;
           this.doubleJump();
           if (this.curAnim() !== "jump") this.play("jump");
           if (this.walkSound) { this.walkSound.stop(); this.walkSound = null; }
@@ -127,7 +127,7 @@ export function makePlayer(k) {
 
         // 🔥 แก้ไข: Attack (ป้องกันการกดค้างด้วยการเช็ค isAttacking)
         this.controlHandlers.push(k.onKeyPress("z", () => {
-          if (!this.canControl || !this.isGrounded() || this.isAttacking) return;
+          if (!this.canControl || !this.isGrounded() || this.isAttacking|| this.grabTarget) return;
 
           this.isAttacking = true;
           this.play("attack");
@@ -179,10 +179,12 @@ export function makePlayer(k) {
         this.controlHandlers.push(k.onKeyPress("v", () => {
           if (!this.canControl) return;
           if (!this.grabTarget) {
-            const trees = k.get("Tree");
+            const boxes = k.get("Tree") || [];
+            const keys = k.get("key") || [];
+            const candidates = [...boxes, ...keys];
             let nearest = null;
             let minDist = 40;
-            trees.forEach((t) => {
+            candidates.forEach((t) => {
               if (!t.exists()) return;
               const d = this.pos.dist(t.pos);
               if (d < minDist && !t.isGrabbed) { nearest = t; minDist = d; }

@@ -1,13 +1,13 @@
-export function makeBox(k, initialPos) {
+export function makeKey(k, initialPos) {
   return k.make([
     k.pos(initialPos),
-    k.sprite("Box"),
+    k.sprite("key"),
     k.anchor("center"),
-    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16) }),
+    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16), collisionIgnore: ["sword-hitbox", "player-skill", "enemy-attack-hitbox", "fire-hitbox", "bossAttackHitbox", "player", "npc"] }),
     k.body({ isStatic: false, mass: 100 }),
     k.scale(),
      k.z(10),
-    "Tree",
+    "key",
 
     {
       isDead: false,
@@ -66,10 +66,15 @@ export function makeBox(k, initialPos) {
       // ✅ ทำให้ตาม player ตอนถูกถือ
       update() {
         if (this.isGrabbed && this.grabber) {
+          // follow player with a small horizontal offset to avoid overlap
           this.pos.x = this.grabber.pos.x + (this.grabber.flipX ? -16 : 16);
+          // small vertical offset so the key sits slightly above/beside the player
+          this.pos.y = this.grabber.pos.y - 6;
         }
-        if (!this.grabTarget?.exists()) {
-          this.grabTarget = null;
+        // cleanup if grabber no longer exists
+        if (this.isGrabbed && (!this.grabber || !this.grabber.exists())) {
+          this.isGrabbed = false;
+          this.grabber = null;
         }
       }
     },
