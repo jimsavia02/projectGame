@@ -8,9 +8,9 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
         k.pos(x, y),
         k.sprite("npc"),
         k.anchor("center"),
-        k.area({ shape: new k.Rect(k.vec2(0, 30), 20, 70) }),
+        k.area({ shape: new k.Rect(k.vec2(0, 10), 20, 12) }),
         k.body(), 
-        k.scale(1),
+        k.scale(2),
         "npc"
     ]);
 
@@ -31,6 +31,7 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
         k.outline(1, k.rgb(255, 255, 255)),          // เส้นขอบสีขาว
         k.opacity(0),                               // เริ่มต้นให้โปร่งใส (ซ่อน)
         k.fixed(),                                  // ✅ สำคัญ: ให้ติดหน้าจอ ไม่เลื่อนตามแมพ
+        k.z(100),
     ]);
 
     const content = dialogBox.add([

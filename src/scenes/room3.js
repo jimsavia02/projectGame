@@ -8,6 +8,8 @@ import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc"
 import { makeBox } from "../entities/Box";
 import { manaBar } from "../ui/manaBar";
+import { makeDoor } from "../entities/door"
+import { makeSwitch } from "../entities/switch";
 
 export function room3(k,room3Data,previousSceneData) {
    
@@ -110,12 +112,32 @@ for (const position of positions) {
         position.x,
         position.y,
         [
-            "Hello. Nice to meet you. The weather is nice today",
-            "Why don't you take a look around?"
+            "Jimmy : Hmm… where am I?, I remember I was sleeping in my room…",
+            "Nara : Oh, hello. My name is Nara.",
+            "Nara : This place is called the City of Slumber.",
+            "Nara : Try walking around and exploring first."
         ]
     );
     continue;
 }
+    if (position.name === "door") {
+                // สร้าง object ประตูขึ้นมา
+                const door = makeDoor(k, k.vec2(position.x, position.y));
+                
+                // แอดเข้าไปในฉาก (หรือ map.add(door) ถ้าต้องการให้ยึดกับ map)
+                k.add(door); 
+                
+                continue;
+            }
+    if (position.name === "switch") {
+                        // รอให้ Loop ทำงานไปเรื่อยๆ จนเจอ door ก่อน หรือใช้ k.onUpdate
+                        // แต่ทางที่ปลอดภัยที่สุดคือสร้าง Switch หลังจาก Loop ประตูเสร็จ
+                        // หรือเขียนแบบนี้:
+                    
+                            k.add(makeSwitch(k, k.vec2(position.x, position.y)));
+                      
+                        continue;
+                    }
 
     
     // ... (เงื่อนไขอื่นๆ เช่น spawn boss หรือ drone)

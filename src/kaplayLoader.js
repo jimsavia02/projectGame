@@ -94,9 +94,9 @@ k.loadSprite("fireball","assets/sprites/dr0ne.png",{
   },
 });
 
-k.loadSprite("npc","./assets/sprites/npc1.png", 
-    {sliceX:6,
-        sliceY:1,
+k.loadSprite("npc","./assets/sprites/Orc.png", 
+    {sliceX:8,
+        sliceY:6,
         anims: {
     idle: { from: 0, to: 5, loop: true },
     walk: { from: 0,to: 5, loop:true},
