@@ -177,6 +177,22 @@ export function setMapColliders(k,map, colliders){
       continue;
     }
 
+    if (collider.name === "barrier") {
+      const barrier = k.add([
+        k.rect(collider.width, collider.height),
+        k.color("#ff6b6b"),
+        k.pos(collider.x, collider.y),
+        k.area({
+          collisionIgnore: ["collider"],
+        }),
+        k.body({ isStatic: true }),
+        k.opacity(0.5),
+        "barrier",
+        collider.name,
+      ]);
+      continue;
+    }
+
         map.add([
   k.pos(collider.x, collider.y),
   k.area({
@@ -297,4 +313,38 @@ k.go(targetRoom, {
     });
 
   }
+}
+
+export function checkEnemiesAndRemoveBarrier(k, requiredEnemiesDefeated = 2) {
+  let barrierRemoved = false;
+  
+  k.onUpdate(() => {
+    if (barrierRemoved) return;
+    
+    const enemies = k.get("enemy1");
+    
+    // ถ้า enemies ที่เหลือน้อยกว่าจำนวนที่ต้องจัดการ แสดงว่าจัดการครบแล้ว
+    if (enemies.length < requiredEnemiesDefeated) {
+      barrierRemoved = true;
+      const barriers = k.get("barrier");
+      
+      for (const barrier of barriers) {
+        if (barrier.exists()) {
+          k.tween(
+            barrier.opacity,
+            0,
+            0.5,
+            (val) => (barrier.opacity = val),
+            k.easings.linear
+          );
+          k.wait(0.5, () => {
+            if (barrier.exists()) {
+              barrier.unuse(k.body());
+              k.destroy(barrier);
+            }
+          });
+        }
+      }
+    }
+  });
 }

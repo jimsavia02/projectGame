@@ -3,7 +3,6 @@ import { makePlayer } from "../entities/player";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls,setExitZones} from "./roomutils";
-import { state } from "../state/globalState";
 
 export function room2(k,room2Data,previousSceneData) {
    setBackgroundImage(k, "bgroom1");
@@ -64,9 +63,6 @@ export function room2(k,room2Data,previousSceneData) {
     ) {
       player.setPosition(position.x , position.y );
       player.setControl();
-      // Set respawn position
-      state.set("currentRoom", "room2");
-      state.set("respawnPos", { x: position.x, y: position.y });
       continue;
     }
 
@@ -77,26 +73,6 @@ export function room2(k,room2Data,previousSceneData) {
       player.setPosition(position.x , position.y );
       player.setControl();
       player.respawnIfOutOfBounds(1000, "room2", { exitName: "exit-2" });
-      // Set respawn position
-      state.set("currentRoom", "room2");
-      state.set("respawnPos", { x: position.x, y: position.y });
-      k.camPos(player.pos);
-      continue;
-    }
-
-    if (previousSceneData?.exitName === "respawn" && previousSceneData?.respawnPos) {
-      player.setPosition(previousSceneData.respawnPos.x, previousSceneData.respawnPos.y);
-      // Reset player state
-      player.vel = k.vec2(0, 0);
-      player.play("idle");
-      player.flipX = false;
-      player.isAttacking = false;
-      player.disableControls();
-      player.setControl();
-      player.respawnIfOutOfBounds(1000, "room2");
-      // Update respawn position and health
-      state.set("playerHp", state.current().maxPlayerHp);
-      healthBar.trigger("update");
       k.camPos(player.pos);
       continue;
     }

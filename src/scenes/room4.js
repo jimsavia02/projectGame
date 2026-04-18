@@ -77,9 +77,6 @@ for (const position of positions) {
     player.setPosition(position.x, position.y);
     player.setControl();
     spawned = true;
-    // Set respawn position
-    state.set("currentRoom", "room4");
-    state.set("respawnPos", { x: position.x, y: position.y });
     continue;
   }
 
@@ -89,9 +86,6 @@ for (const position of positions) {
     player.setPosition(position.x, position.y);
     player.setControl();
     spawned = true;
-    // Set respawn position
-    state.set("currentRoom", "room4");
-    state.set("respawnPos", { x: position.x, y: position.y });
     continue;
     }
 
@@ -103,29 +97,8 @@ for (const position of positions) {
     player.setPosition(position.x, position.y + 20);
     player.setControl();
     spawned = true;
-    // Set respawn position
-    state.set("currentRoom", "room4");
-    state.set("respawnPos", { x: position.x, y: position.y + 20 });
     continue;
   }
-
-  if (previousSceneData?.exitName === "respawn" && previousSceneData?.respawnPos) {
-    player.setPosition(previousSceneData.respawnPos.x, previousSceneData.respawnPos.y);
-    // Reset player state
-    player.vel = k.vec2(0, 0);
-    player.play("idle");
-    player.flipX = false;
-    player.isAttacking = false;
-    player.disableControls();
-    player.setControl();
-    spawned = true;
-    // Update respawn position and health
-    state.set("playerHp", state.current().maxPlayerHp);
-    healthBar.trigger("update");
-    k.camPos(player.pos);
-    continue;
-  }
-
   if (position.name === "door") {
             // สร้าง object ประตูขึ้นมา
             const door = makeDoor(k, k.vec2(position.x, position.y));
