@@ -89,8 +89,8 @@ k.loadSpriteAtlas("./assets/manaUi.png", {
   manaBar: {
     x: 0,
     y: 0,
-    width: 96,
-    height: 336,
+    width: 191,
+    height: 448,
     sliceY: 7,
   },
 });

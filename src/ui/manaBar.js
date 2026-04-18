@@ -7,7 +7,7 @@ function makeManaBar(k) {
     k.fixed(),
     k.anchor("topleft"),
     k.pos(80, 15), // ปรับ Y ให้ลงมาข้างล่าง Health Bar (Health Bar คุณอยู่ที่ 16)
-    k.scale(3),
+    k.scale(2),
     k.z(100),
     {
       // Mapping ใหม่สำหรับ 7 เฟรม (0-6)
