@@ -100,7 +100,7 @@ export function makePlayer(k) {
             healthBar.trigger("update");
             manaBar.trigger("update");
 
-            k.go("room3", { exitName: null });
+            k.go(k.getSceneName(), { exitName: null });
           }
           // เมื่อตีจบ ให้กลับสถานะปกติทันที
           if (anim === "attack") {
@@ -148,7 +148,7 @@ export function makePlayer(k) {
 
           const hitbox = this.add([
             k.pos(this.flipX ? -17 : 5, 0),
-            k.area({ shape: new k.Rect(k.vec2(0), 10, 5) }),
+            k.area({ shape: new k.Rect(k.vec2(0), 15, 5) }),
             "sword-hitbox",
           ]);
 

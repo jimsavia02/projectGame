@@ -15,6 +15,7 @@ import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 
 
 export function room4(k,room4Data,previousSceneData) {
+state.currentRoom = "room4";
    
    k.camScale(1.8),
    k.camPos(1280,720);
@@ -71,6 +72,7 @@ export function room4(k,room4Data,previousSceneData) {
 let spawned = false;
 
 for (const position of positions) {
+
 
 
   if (position.name === "player" && !previousSceneData?.exitName) {
@@ -136,19 +138,16 @@ for (const position of positions) {
                 }
 
         if (position.name === "boss") {
-    // ✅ เรียกใช้ลอยๆ ได้เลย เพราะข้างในมี k.add() อยู่แล้ว
-    const boss = makeBoss(k, k.vec2(position.x, position.y)); 
-    
-    continue;
+            // ✅ เรียกใช้ลอยๆ ได้เลย เพราะข้างในมี k.add() อยู่แล้ว
+            const boss = makeBoss(k, k.vec2(position.x, position.y)); 
+            continue;
+        }
 }
-    
 
-  
-}
 
 // 🔥 ต้องอยู่นอก loop เท่านั้น
 if (!spawned) {
-  player.setPosition(500, 300);
+  player.setPosition(110, 130);
   player.setControl();
 }
     const bgm = k.play("DystopianCity", {
@@ -167,10 +166,6 @@ if (!spawned) {
     if (player.walkSound) {
         player.walkSound.stop();
         player.walkSound = null;
-    }
-});
-
-
-
-
+        }
+    });
 }

@@ -6,6 +6,7 @@ export function makeBox(k, initialPos) {
     k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16) }),
     k.body({ isStatic: false, mass: 100 }),
     k.scale(),
+    k.health(5),
      k.z(10),
     "Tree",
 
@@ -27,10 +28,10 @@ export function makeBox(k, initialPos) {
           this.takeDamage(1);
         });
 
-        this.on("hurt", () => {
-          if (this.hp() <= 0 && !this.isDead) {
-            this.triggerExplode();
-          }
+        this.on("healthChanged", () => {
+        if (this.hp() <= 0 && !this.isDead) {
+          this.triggerExplode();
+        }
         });
 
         this.onAnimEnd((anim) => {
@@ -43,7 +44,7 @@ export function makeBox(k, initialPos) {
       takeDamage(dmg) {
         if (this.isDead || this.isInvincible) return;
 
-        this.hurt(dmg);
+        this.setHP(this.hp() - dmg);
         this.isInvincible = true;
         this.opacity = 0.5;
 

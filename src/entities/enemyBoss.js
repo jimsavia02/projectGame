@@ -16,7 +16,7 @@ export function makeBoss(k, initialPos) {
     k.anchor("center"),
     k.health(15),
     k.opacity(1),
-    
+    "boss",
 
     k.state("follow", [
       "follow",

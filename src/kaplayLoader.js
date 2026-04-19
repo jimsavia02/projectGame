@@ -183,7 +183,6 @@ k.loadSprite("logo","assets/sprites/startmanu.png");
 k.loadSprite("alert","assets/alert.png")
 
 
-
 k.loadSound("boom", "assets/sounds/boom.wav");
 k.loadSound("flamethrower", "assets/sounds/flamethrower.wav");
 k.loadSound("notify","assets/sounds/notify.mp3");

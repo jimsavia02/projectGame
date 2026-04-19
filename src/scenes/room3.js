@@ -14,8 +14,9 @@ import { makeKey } from "../entities/key";
 
 
 export function room3(k,room3Data,previousSceneData) {
+state.currentRoom = "room3";
    
-   k.camScale(3),
+   k.camScale(2.8),
    k.camPos(1280,720);
    k.setGravity(1000);
    

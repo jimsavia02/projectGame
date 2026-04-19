@@ -57,6 +57,7 @@ export function room5(k, room5Data, previousSceneData) {
   // 🔥 สร้าง player
   const player = k.add(makePlayer(k));
   player.play("idle");
+  player.currentRoom = "room5";
 
   // 🔥 กล้อง
   setCameraZones(k, map, cameras);
@@ -73,6 +74,7 @@ export function room5(k, room5Data, previousSceneData) {
 
   // 🔥 วนตำแหน่ง
   for (const position of positions) {
+    
 
     // ✅ spawn ตอนเริ่มเกม
     if (position.name === "player") {
