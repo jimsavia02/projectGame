@@ -2,7 +2,7 @@ import { makeBoss } from "../entities/Boss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
 import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones} from "./roomutils";
-import { state } from "../state/globalState";
+import { state, statePropsEnum } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { manaBar } from "../ui/manaBar";
@@ -16,6 +16,7 @@ import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 
 export function room4(k,room4Data,previousSceneData) {
 state.currentRoom = "room4";
+state.set(statePropsEnum.lastRoom, "room4");
    
    k.camScale(1.8),
    k.camPos(1280,720);

@@ -79,6 +79,7 @@ export function makePlayer(k) {
           makeBlink(k, this);
           if (this.hp() <= 0) {
             this.isDead = true;
+            this.play("explode");
           }
           if (this.hp() > 0) {
             state.set(statePropsEnum.playerHp, this.hp());
@@ -87,12 +88,16 @@ export function makePlayer(k) {
           }
           state.set(statePropsEnum.playerHp, state.current().maxPlayerHp);
           this.play("explode");
+          k.go("gameover", {
+  room: this.currentRoom,
+});
         });
 
         // 🔥 แก้ไข: จัดการตอนจบ Anim
         this.onAnimEnd((anim) => {
           if (anim === "explode") {  
             const currentState = state.current();
+
 
             state.set(statePropsEnum.playerHp, currentState.maxPlayerHp);
             state.set(statePropsEnum.playerMana, 6);

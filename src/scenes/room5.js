@@ -1,6 +1,7 @@
 import { makeBoss } from "../entities/enemyBoss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
+import { state, statePropsEnum } from "../state/globalState";
 import { setCameraZones, setMapColliders, setCameraControls, setExitZones } from "./roomutils";
 import { makeNPC } from "../entities/npc";
 import { makeBox } from "../entities/Box";
@@ -11,6 +12,7 @@ import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 
 export function room5(k, room5Data, previousSceneData) {
+  state.set(statePropsEnum.lastRoom, "room5");
 
   k.camScale(1.8);
   k.camPos(1280, 720);

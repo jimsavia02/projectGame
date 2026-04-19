@@ -1,5 +1,6 @@
 
 import { k } from "./kaplayLoader.js"
+import { gameover } from "./scenes/gameover.js";
 import { room1 } from "./scenes/room1.js"
 import { room2 } from "./scenes/room2.js"
 import { room3 } from "./scenes/room3.js"
@@ -17,8 +18,12 @@ async function main() {
 
     k.scene("intro", (previousSceneData) => {
     intro(k, previousSceneData);
-  });
-  k.scene("room1", (previousSceneData) => {
+    });
+    k.scene("gameover", (data) => {
+    gameover(k, data);
+    });
+  
+k.scene("room1", (previousSceneData) => {
     room1(k, room1Data,previousSceneData)
 });
 
@@ -39,7 +44,7 @@ k.scene("room5", (previousSceneData) => {
 });
 
 
-k.go("intro");
+k.go("room4");
 }
 
 main();
