@@ -1,6 +1,7 @@
 import { state, statePropsEnum } from "../state/globalState";
 import { healthBar } from "../ui/healthBar";
 import { makeBlink } from "./entitySharedLogic";
+import { manaBar } from "../ui/manaBar";
 
 export function makePlayer(k) {
   return k.make([
@@ -90,7 +91,15 @@ export function makePlayer(k) {
 
         // 🔥 แก้ไข: จัดการตอนจบ Anim
         this.onAnimEnd((anim) => {
-          if (anim === "explode") {
+          if (anim === "explode") {  
+            const currentState = state.current();
+
+            state.set(statePropsEnum.playerHp, currentState.maxPlayerHp);
+            state.set(statePropsEnum.playerMana, 6);
+
+            healthBar.trigger("update");
+            manaBar.trigger("update");
+
             k.go("room3", { exitName: null });
           }
           // เมื่อตีจบ ให้กลับสถานะปกติทันที

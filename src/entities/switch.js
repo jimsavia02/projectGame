@@ -27,6 +27,10 @@ export function makeSwitch(k, position) {
                     d.destroy();
                 });
 
+                k.get("door2").forEach((d) => {
+                    d.destroy();
+                });
+
                 sw.opacity = 0.5; 
                 k.debug.log("Doors destroyed!");
             }

@@ -39,7 +39,7 @@ k.scene("room5", (previousSceneData) => {
 });
 
 
-k.go("room4");
+k.go("room5");
 }
 
 main();

@@ -1,4 +1,6 @@
 import { state, statePropsEnum } from "../state/globalState";
+import { healthBar } from "../ui/healthBar";
+import { manaBar } from "../ui/manaBar";
 
 export function setBackgroundImage(k,spriteName){
 
@@ -320,8 +322,17 @@ export function setExitZones(k,map,exits,){
         k.go("final-exit");
         return;
       }
-
+      // เมื่อไปห้องถัดไปจะรีเลือด/มานา
       const targetRoom = exit.name.replace("exit-", "room");
+
+      const currentState = state.current();
+
+      state.set(statePropsEnum.playerHp, currentState.maxPlayerHp);
+      state.set(statePropsEnum.playerMana, 6);
+    
+
+      healthBar.trigger("update");
+      manaBar.trigger("update");
 
 k.go(targetRoom, {
   exitName: exit.name,
