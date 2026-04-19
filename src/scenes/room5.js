@@ -6,6 +6,9 @@ import { makeNPC } from "../entities/npc";
 import { makeBox } from "../entities/Box";
 import { healthBar } from "../ui/healthBar";
 import { manaBar } from "../ui/manaBar";
+import { loadSpikes, setupSpikeDamage } from "../entities/spike";
+import { makeDoor } from "../entities/door"
+import { makeSwitch } from "../entities/switch";
 
 export function room5(k, room5Data, previousSceneData) {
 
@@ -13,6 +16,7 @@ export function room5(k, room5Data, previousSceneData) {
   k.camPos(1280, 720);
   k.setGravity(1000);
 
+  const spikesLayer = room5Data.layers.find(l => l.name === "spikes");
   const roomLayers = room5Data.layers;
   const map = k.add([k.pos(0, 0), k.sprite("room5")]);
 
@@ -20,6 +24,7 @@ export function room5(k, room5Data, previousSceneData) {
   const positions = [];
   const cameras = [];
   const exits = [];
+  const spikes = [];
 
   // 🔥 อ่าน layer จาก Tiled
   for (const layer of roomLayers) {
@@ -40,6 +45,10 @@ export function room5(k, room5Data, previousSceneData) {
     if (layer.name === "colliders") {
       colliders.push(...layer.objects);
     }
+
+    if (layer.name === "spikes" && layer.objects) {
+      spikes.push(...layer.objects);
+    }
   }
 
   // 🔥 สร้าง collider
@@ -55,6 +64,12 @@ export function room5(k, room5Data, previousSceneData) {
 
   // 🔥 exit ไป room4 (แก้ได้ตามต้องการ)
   setExitZones(k, map, exits, "room4");
+
+  // spikes
+  loadSpikes(k, map, spikes);
+
+  // spikes damage
+  setupSpikeDamage(k);
 
   // 🔥 วนตำแหน่ง
   for (const position of positions) {
@@ -93,6 +108,16 @@ export function room5(k, room5Data, previousSceneData) {
       continue;
     }
 
+    if (position.name === "Tree") {
+      k.add(makeBox(k, k.vec2(position.x, position.y)));
+      continue;
+    }
+
+     if (position.name === "Tree") {
+      k.add(makeBox(k, k.vec2(position.x, position.y)));
+      continue;
+    }
+
     // 🔥 NPC
     if (position.name === "npc") {
       makeNPC(
@@ -118,6 +143,27 @@ export function room5(k, room5Data, previousSceneData) {
       }
       continue;
     }
+      // door
+     if (position.name === "door") {
+            // สร้าง object ประตูขึ้นมา
+            const door = makeDoor(k, k.vec2(position.x, position.y));
+            
+            // แอดเข้าไปในฉาก (หรือ map.add(door) ถ้าต้องการให้ยึดกับ map)
+            k.add(door); 
+            
+            continue;
+        }
+      if (position.name === "switch") {
+                 // รอให้ Loop ทำงานไปเรื่อยๆ จนเจอ door ก่อน หรือใช้ k.onUpdate
+                 // แต่ทางที่ปลอดภัยที่สุดคือสร้าง Switch หลังจาก Loop ประตูเสร็จ
+                 // หรือเขียนแบบนี้:
+             
+                     k.add(makeSwitch(k, k.vec2(position.x, position.y)));
+               
+                 continue;
+      }
+        
+
   }
 
   // 🔥 UI
