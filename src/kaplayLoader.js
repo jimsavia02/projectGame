@@ -41,6 +41,20 @@ k.loadSprite("drone1","./assets/sprites/Soldier.png",
             hurt:{ from: 46,to:48, loop:false ,},
             explode :{ from: 54, to:57,loop:false},
     }});
+
+k.loadSprite("Soldier","./assets/sprites/Soldier.png", 
+    {sliceX: 9,
+        sliceY:7,
+        anims: {
+            idle :{ from: 0, to:5, loop:true,},
+            walk :{ from: 9,to: 16, loop:true},
+            run:{ from :9, to: 16, loop:true},
+            attack1 :{ from: 18, to: 23, loop:false,},
+            attack2 :{ from: 27, to: 32, loop:false,},
+            attack3 :{ from: 37, to: 45, loop:false,speed:10},
+            hurt:{ from: 46,to:48, loop:false ,},
+            explode :{ from: 54, to:57,loop:false},
+    }});
 k.loadSprite("arrow","./assets/sprites/arrow.png",{
   sliceX: 1,
   sliceY:1,
@@ -146,7 +160,7 @@ k.loadSprite("key","./assets/key.png",{
   },
 });
 
-k.loadSprite("boss", "assets/sprites/boss.png", {
+k.loadSprite("boss", "assets/sprites/boss2.png", {
     sliceX: 8, // คอลัมน์ (นับแนวนอน)
     sliceY: 8, // แถว (นับแนวตั้ง - รูปนี้มี 8 แถว)
 
@@ -154,7 +168,7 @@ k.loadSprite("boss", "assets/sprites/boss.png", {
         // แถวที่ 1: Idle
         idle: { from: 0, to: 7, loop: true, speed: 8 },
         // แถวที่ 2: Walk
-        walk: { from: 8, to: 15, loop: true, speed: 10 },
+        walk: { from: 8, to: 15, loop: true,  },
         // แถวที่ 3: Attack
         attack: { from: 16, to: 23, loop: false, speed: 12 },
         // แถวที่ 4-5: การร่ายเวทย์และการกลายร่าง (ในรูปคือเฟรม 24-39)
@@ -176,6 +190,29 @@ k.loadSprite("spell_vortex", "assets/sprites/boss.png", {
     },
 });
 
+k.loadSprite("Knight", "assets/sprites/knight.png", {
+    sliceX: 11,
+    sliceY: 8,
+    anims: {
+        idle: { from: 0, to: 5, loop: true, speed: 8 },
+     
+        walk: { from: 11, to: 18, loop: true,  },
+       
+        attack1: { from: 22, to: 28, loop: false, speed: 12 },
+
+        attack2: { from:33, to:42, loop:false },
+        attack3: { from:44, to:54, loop:false },
+        cast:{from:44,to:49,loop:false },
+        defense: { from: 55, to: 58, loop: false },
+        
+       
+        hurt: { from: 66, to: 69, loop: false, speed: 10 },
+    
+    
+        death: { from: 77, to: 79, loop: false, speed: 8 },
+       
+    },
+});
 
 k.loadSprite("bgroom1", "assets/sprites/bts.png");
 

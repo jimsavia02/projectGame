@@ -8,7 +8,7 @@ export function makeNPC(k, player, x, y, dialogs, onDialogComplete) {
         k.pos(x, y),
         k.sprite("npc"),
         k.anchor("center"),
-        k.area({ shape: new k.Rect(k.vec2(0, 10), 20, 12) }),
+        k.area({ shape: new k.Rect(k.vec2(0, 30), 20, 12) }),
         k.body(), 
         k.scale(2),
         "npc"

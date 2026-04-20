@@ -1,31 +1,32 @@
-export function makeDrone(k, initialPos) {
+export function makeEnemy2(k, initialPos, makeBox) {
   const BLOCK_SIZE = 16;
   const WALK_BLOCKS = 3;
   const maxDistance = BLOCK_SIZE * WALK_BLOCKS;
 
   return k.make([
     k.pos(initialPos),
-    k.sprite("Soldier", { anim: "idle" }),
+    k.sprite("Knight", { anim: "idle" }),
     k.area({ 
       shape: new k.Rect(k.vec2(0, -1), 25, 15), 
       collisionIgnore: ["player"] 
     }),
     k.anchor("center"),
     k.body(),
-    k.health(6),
-    k.scale(1.5),
-    "enemy1",
+    k.health(10),
+    k.scale(2),
+    "enemy2",
 
     {
-      speed: 30,
-      pursuitSpeed: 70,
-      range: 120,
-      attackRange: 40,
+      speed: 35,
+      pursuitSpeed: 75,
+      range: 130,
+      attackRange: 45,
       startX: initialPos.x,
       direction: 1,
       isDead: false,
       isAttacking: false,
       isHurt: false,
+      isDefending: false,
       canAttack: true,
 
       add() {
@@ -36,7 +37,8 @@ export function makeDrone(k, initialPos) {
       setBehavior() {
         this.onUpdate(() => {
           if (this.isDead) return;
-          if (this.curAnim() === "attack3" || this.isAttacking) return;
+          if (this.curAnim()?.includes("attack") || this.isAttacking) return;
+          if (this.isDefending) return;
 
           if (this.isHurt) {
             const player = k.get("player")[0];
@@ -61,7 +63,7 @@ export function makeDrone(k, initialPos) {
             const dir = player.pos.x > this.pos.x ? 1 : -1;
             this.move(dir * this.pursuitSpeed, 0);
             this.flipX = dir < 0; 
-            if (this.curAnim() !== "run") this.play("run");
+            if (this.curAnim() !== "walk") this.play("walk");
           } else {
             const distanceFromStart = this.pos.x - this.startX;
             if (distanceFromStart >= maxDistance) this.direction = -1;
@@ -74,16 +76,47 @@ export function makeDrone(k, initialPos) {
         });
       },
 
+      // ✅ สุ่มการโจมตี 3 แบบ (attack1, attack2, attack3) หรือป้องกัน ด้วยความเสียหายที่แตกต่างกัน
       attackPlayer(player) {
-        this.isAttacking = true;
-        this.canAttack = false; 
+        this.canAttack = false;
         this.flipX = player.pos.x < this.pos.x;
         
-        const selectedAnim = k.choose(["attack", "attack2"]);
-        this.play(selectedAnim);
+        // สุ่มเลือกการโจมตี 3 แบบ หรือป้องกัน
+        const actions = [
+          { anim: "attack1", damage: 1, delay: 0.25, duration: 0.3, type: "attack" },  // เบาสุด
+          { anim: "attack2", damage: 2, delay: 0.35, duration: 0.4, type: "attack" },  // กลาง
+          { anim: "attack3", damage: 3, delay: 0.45, duration: 0.5, type: "attack" },  // แรงสุด
+          { anim: "defense", delay: 0.5, duration: 1.2, type: "defense" }               // ป้องกัน
+        ];
+        
+        const selectedAction = k.choose(actions);
+        
+        if (selectedAction.type === "defense") {
+          this.activateDefense(selectedAction);
+        } else {
+          this.performAttack(selectedAction);
+        }
+      },
 
-        k.wait(0.3, () => {
+      // ✅ ฟังก์ชันป้องกัน - ไม่ได้รับดาเมจในขณะที่ป้องกัน
+      activateDefense(defenseData) {
+        this.isDefending = true;
+        this.isAttacking = false;
+        this.play(defenseData.anim);
+        
+        k.wait(defenseData.duration, () => {
+          if (!this.isDead) this.isDefending = false;
+        });
+      },
+
+      // ✅ ฟังก์ชันโจมตี
+      performAttack(selectedAttack) {
+        this.isAttacking = true;
+        this.play(selectedAttack.anim);
+
+        k.wait(selectedAttack.delay, () => {
           if (this.isDead || this.isHurt) return;
+          
           const hitBoxOffset = this.flipX ? -22 : 22;
           const hitBox = k.add([
             k.pos(this.pos.x + hitBoxOffset, this.pos.y),
@@ -91,61 +124,24 @@ export function makeDrone(k, initialPos) {
             k.anchor("center"),
             "enemy-attack-hitbox",
           ]);
-          hitBox.onCollide("player", (p) => { p.hurt(1); k.destroy(hitBox); });
-          k.wait(0.1, () => { if (hitBox.exists()) k.destroy(hitBox); });
-        });
-      },
-
-      // --- ส่วนที่แก้ไข: ยิงแล้วหายไปในระยะ 200px ---
-      counterAttack() {
-        if (this.isDead) return;
-        const player = k.get("player")[0];
-        if (!player) return;
-
-        this.isAttacking = true;
-        this.canAttack = false; 
-        this.flipX = player.pos.x < this.pos.x;
-
-        this.play("attack3", { speed: 10 });
-
-        k.wait(0.6, () => {
-          if (this.isDead || this.isHurt) return;
-          const arrowDir = this.flipX ? -1 : 1;
-          const spawnPos = k.vec2(this.pos.x + (arrowDir * 20), this.pos.y);
-
-          const arrow = k.add([
-            k.pos(spawnPos),
-            k.sprite("arrow"),
-            k.anchor("center"),
-            k.area({ shape: new k.Rect(k.vec2(0), 16, 6) }), 
-            k.move(arrowDir === 1 ? 0 : 180, 150), 
-            k.offscreen({ destroy: true }),
-            "enemy-projectile",
-            { spawnPos: spawnPos } // เก็บจุดเกิดไว้เช็คระยะ
-          ]);
           
-          arrow.flipX = this.flipX;
-
-          // เช็คระยะทางทุกเฟรม
-          arrow.onUpdate(() => {
-            if (arrow.pos.dist(arrow.spawnPos) >= 150) {
-              k.destroy(arrow);
-            }
+          // ทำความเสียหายตามประเภทการโจมตี
+          hitBox.onCollide("player", (p) => { 
+            p.hurt(selectedAttack.damage); 
+            k.destroy(hitBox); 
           });
-
-          arrow.onCollide("player", (p) => {
-            p.hurt(1);
-            k.destroy(arrow);
-          });
-
-          arrow.onCollide("colliders", () => {
-            k.destroy(arrow);
+          
+          k.wait(selectedAttack.duration, () => { 
+            if (hitBox.exists()) k.destroy(hitBox); 
           });
         });
       },
 
       takeDamage() {
         if (this.isDead || this.isHurt) return;
+        // ✅ ไม่ได้รับดาเมจขณะป้องกัน
+        if (this.isDefending) return;
+        
         this.isHurt = true;
         this.isAttacking = false; 
         
@@ -170,10 +166,18 @@ export function makeDrone(k, initialPos) {
         this.onAnimEnd((anim) => {
           if (anim === "explode") k.destroy(this);
 
-          if (anim === "attack" || anim === "attack2" || anim === "attack3") {
+          if (anim.includes("attack")) {
             this.isAttacking = false;
             this.play("idle");
-            k.wait(1.0, () => { 
+            k.wait(1.2, () => { 
+              if (!this.isDead) this.canAttack = true;
+            });
+          }
+
+          if (anim === "defense") {
+            this.isDefending = false;
+            this.play("idle");
+            k.wait(0.8, () => { 
               if (!this.isDead) this.canAttack = true;
             });
           }
@@ -181,7 +185,7 @@ export function makeDrone(k, initialPos) {
           if (anim === "hurt") {
             this.isHurt = false;
             k.wait(0.1, () => { 
-              if (!this.isDead) this.counterAttack();
+              if (!this.isDead) this.canAttack = true;
             });
           }
         });
@@ -195,7 +199,11 @@ export function makeDrone(k, initialPos) {
            this.stop(); 
            this.body.unuse(); 
         }
-        this.play("explode");
+        this.play("death");
+        
+        // ✅ Spawn box ที่จุดตาย
+        const boxEntity = makeBox(k, this.pos);
+        k.add(boxEntity);
       },
     },
   ]);

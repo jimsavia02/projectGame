@@ -1,6 +1,4 @@
 import { state, statePropsEnum } from "../state/globalState";
-import { healthBar } from "../ui/healthBar";
-import { manaBar } from "../ui/manaBar";
 
 export function setBackgroundImage(k,spriteName){
 
@@ -195,17 +193,33 @@ export function setMapColliders(k,map, colliders){
       continue;
     }
 
-    if (collider.name === "barrier2") {
-      const barrier2 = k.add([
+    if (collider.name === "barrier3") {
+      const barrier3 = k.add([
         k.rect(collider.width, collider.height),
-        k.color("#6b8fff"),
+        k.color("#4a4a4a"),
         k.pos(collider.x, collider.y),
         k.area({
           collisionIgnore: ["collider"],
         }),
         k.body({ isStatic: true }),
-        k.opacity(0.5),
-        "barrier2",
+        k.opacity(0.8),
+        "barrier3",
+        collider.name,
+      ]);
+      continue;
+    }
+
+    if (collider.name === "barrier4") {
+      const barrier4 = k.add([
+        k.rect(collider.width, collider.height),
+        k.color("#6b4226"),
+        k.pos(collider.x, collider.y),
+        k.area({
+          collisionIgnore: ["collider"],
+        }),
+        k.body({ isStatic: true }),
+        k.opacity(0.8),
+        "barrier4",
         collider.name,
       ]);
       continue;
@@ -322,17 +336,8 @@ export function setExitZones(k,map,exits,){
         k.go("final-exit");
         return;
       }
-      // เมื่อไปห้องถัดไปจะรีเลือด/มานา
+
       const targetRoom = exit.name.replace("exit-", "room");
-
-      const currentState = state.current();
-
-      state.set(statePropsEnum.playerHp, currentState.maxPlayerHp);
-      state.set(statePropsEnum.playerMana, 6);
-    
-
-      healthBar.trigger("update");
-      manaBar.trigger("update");
 
 k.go(targetRoom, {
   exitName: exit.name,
@@ -374,4 +379,69 @@ export function checkEnemiesAndRemoveBarrier(k, requiredEnemiesDefeated = 2) {
       }
     }
   });
+}
+
+// ✅ ฟังก์ชันตรวจสอบการพ่ายแพ้ของ enemy2 และทำลาย barrier3
+export function checkEnemy2AndRemoveBarrier3(k) {
+  let barrier3Removed = false;
+  
+  k.onUpdate(() => {
+    if (barrier3Removed) return;
+    
+    const enemies2 = k.get("enemy2");
+    
+    // ถ้า enemy2 ตายแล้ว ให้ลบ barrier3
+    if (enemies2.length > 0 && enemies2[0].isDead) {
+      barrier3Removed = true;
+      const barriers3 = k.get("barrier3");
+      
+      for (const barrier of barriers3) {
+        if (barrier.exists()) {
+          k.tween(
+            barrier.opacity,
+            0,
+            0.5,
+            (val) => (barrier.opacity = val),
+            k.easings.linear
+          );
+          k.wait(0.5, () => {
+            if (barrier.exists()) {
+              barrier.unuse(k.body());
+              k.destroy(barrier);
+            }
+          });
+        }
+      }
+    }
+  });
+}
+
+// ✅ ฟังก์ชันเพื่อลบ barrier4 หลังจากนำ key มาให้ NPC2
+export function checkBarrier4AndRemoveAfterKeyReceived(k) {
+  let barrier4Removed = false;
+  
+  return function destroyBarrier4() {
+    if (barrier4Removed) return;
+    barrier4Removed = true;
+    
+    const barriers4 = k.get("barrier4");
+    
+    for (const barrier of barriers4) {
+      if (barrier.exists()) {
+        k.tween(
+          barrier.opacity,
+          0,
+          0.5,
+          (val) => (barrier.opacity = val),
+          k.easings.linear
+        );
+        k.wait(0.5, () => {
+          if (barrier.exists()) {
+            barrier.unuse(k.body());
+            k.destroy(barrier);
+          }
+        });
+      }
+    }
+  };
 }

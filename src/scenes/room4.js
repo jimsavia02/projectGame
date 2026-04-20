@@ -1,24 +1,27 @@
 import { makeBoss } from "../entities/Boss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
-import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones} from "./roomutils";
+import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones, checkEnemy2AndRemoveBarrier3, checkBarrier4AndRemoveAfterKeyReceived} from "./roomutils";
 import { state, statePropsEnum } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { manaBar } from "../ui/manaBar";
 import { makeNPC } from "../entities/npc"
+import { makeNPC2 } from "../entities/npc2"
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 import { makeDoor2 } from "../entities/door2";
 import { makeBox } from "../entities/Box";
 import { loadSpikes, setupSpikeDamage } from "../entities/spike";
+import { makeKey } from "../entities/key";
+import { makeEnemy2 } from "../entities/enemy2";
 
 
 export function room4(k,room4Data,previousSceneData) {
 state.currentRoom = "room4";
 state.set(statePropsEnum.lastRoom, "room4");
    
-   k.camScale(1.8),
+   k.camScale(3),
    k.camPos(1280,720);
    k.setGravity(1000);
     
@@ -32,6 +35,8 @@ state.set(statePropsEnum.lastRoom, "room4");
        const exits = [];
        const spikes = [];
       
+   // ✅ สร้าง destroyBarrier4 callback สำหรับ npc2
+   const destroyBarrier4 = checkBarrier4AndRemoveAfterKeyReceived(k);
 
    
        for (const layer of roomLayers) {
@@ -143,6 +148,40 @@ for (const position of positions) {
             const boss = makeBoss(k, k.vec2(position.x, position.y)); 
             continue;
         }
+
+        if (position.name === "enemy1") {
+
+            const enemy1 = k.add(
+                makeDrone(k, k.vec2(position.x, position.y))
+            );
+
+            enemy1.setBehavior();
+            enemy1.setEvents();
+            continue;
+        }
+        if (position.name === "key") {
+        
+                    const Tree = k.add(
+                        makeKey(k, k.vec2(position.x, position.y))
+                    );
+                    continue;
+                }
+
+        if (position.name === "enemy2") {
+
+            const enemy2 = k.add(
+                makeEnemy2(k, k.vec2(position.x, position.y), makeBox)
+            );
+
+            enemy2.setBehavior();
+            enemy2.setEvents();
+            continue;
+        }
+
+        if (position.name === "npc2") {
+            const npc2 = makeNPC2(k, player, position.x, position.y, destroyBarrier4);
+            continue;
+        }
 }
 
 
@@ -151,10 +190,14 @@ if (!spawned) {
   player.setPosition(110, 130);
   player.setControl();
 }
-    const bgm = k.play("DystopianCity", {
-        volume: 0.5, // ปรับความดัง (0.0 ถึง 1.0)
-        loop: true,   // ให้เล่นวนซ้ำไปเรื่อยๆ
-    });
+
+// ✅ ตรวจสอบการพ่ายแพ้ของ enemy2 และลบ barrier3
+checkEnemy2AndRemoveBarrier3(k);
+
+    // const bgm = k.play("DystopianCity", {
+    //     volume: 0.5, // ปรับความดัง (0.0 ถึง 1.0)
+    //     loop: true,   // ให้เล่นวนซ้ำไปเรื่อยๆ
+    // });
 
     healthBar.setEvents();
         healthBar.trigger("update");

@@ -155,10 +155,10 @@ for (const position of positions) {
     
     
 }
-    const bgm = k.play("DystopianCity", {
-        volume: 0.5, // ปรับความดัง (0.0 ถึง 1.0)
-        loop: true,   // ให้เล่นวนซ้ำไปเรื่อยๆ
-    });
+    // const bgm = k.play("DystopianCity", {
+    //     volume: 0.5, // ปรับความดัง (0.0 ถึง 1.0)
+    //     loop: true,   // ให้เล่นวนซ้ำไปเรื่อยๆ
+    // });
 
    healthBar.setEvents();
        healthBar.trigger("update");
