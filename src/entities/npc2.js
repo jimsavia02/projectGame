@@ -145,9 +145,9 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
 
     canPressE = false; // ✅ ปิด input ชั่วคราว
     
-    // ✅ ถ้ายังไม่ได้รับ key ให้ถามให้นำ key มา
+    // ✅ ถ้ายังไม่ได้รับ key ให้ตรวจสอบว่ามี key ไหม
     if (!hasReceivedKey) {
-      nextDialog();
+      receiveKey();
     } else {
       // ✅ ถ้าได้ key แล้ว ให้ปรอท
       nextDialog();
