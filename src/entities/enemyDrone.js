@@ -79,7 +79,7 @@ export function makeDrone(k, initialPos) {
         this.canAttack = false; 
         this.flipX = player.pos.x < this.pos.x;
         
-        const selectedAnim = k.choose(["attack", "attack2"]);
+        const selectedAnim = k.choose(["attack1", "attack2"]);
         this.play(selectedAnim);
 
         k.wait(0.3, () => {
@@ -170,7 +170,7 @@ export function makeDrone(k, initialPos) {
         this.onAnimEnd((anim) => {
           if (anim === "explode") k.destroy(this);
 
-          if (anim === "attack" || anim === "attack2" || anim === "attack3") {
+          if (anim === "attack1" || anim === "attack2" || anim === "attack3") {
             this.isAttacking = false;
             this.play("idle");
             k.wait(1.0, () => { 
