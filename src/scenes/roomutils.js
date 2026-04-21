@@ -193,6 +193,22 @@ export function setMapColliders(k,map, colliders){
       continue;
     }
 
+        if (collider.name === "barrier2") {
+      const barrier = k.add([
+        k.rect(collider.width, collider.height),
+        k.color("#ff6b6b"),
+        k.pos(collider.x, collider.y),
+        k.area({
+          collisionIgnore: ["collider"],
+        }),
+        k.body({ isStatic: true }),
+        k.opacity(0.5),
+        "barrier2",
+        collider.name,
+      ]);
+      continue;
+    }
+
     if (collider.name === "barrier3") {
       const barrier3 = k.add([
         k.rect(collider.width, collider.height),
