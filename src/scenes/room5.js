@@ -12,7 +12,9 @@ import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 
 export function room5(k, room5Data, previousSceneData) {
-  state.set(statePropsEnum.lastRoom, "room5");
+state.set("playerHp", state.current().maxPlayerHp);
+state.set("playerMana", 6);
+state.set(statePropsEnum.lastRoom, "room5");
 
   k.camScale(1.8);
   k.camPos(1280, 720);

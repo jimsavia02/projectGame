@@ -15,6 +15,8 @@ import { makeKey } from "../entities/key";
 
 
 export function room3(k,room3Data,previousSceneData) {
+state.set("playerHp", state.current().maxPlayerHp);
+state.set("playerMana", 6);
 state.currentRoom = "room3";
 state.set(statePropsEnum.lastRoom, "room3");
    
