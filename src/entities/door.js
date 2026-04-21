@@ -5,6 +5,7 @@ export function makeDoor(k, position) {
         k.pos(position),
          k.anchor("center"),
        k.area({ shape: new k.Rect(k.vec2(0,0), 16, 90) }),
+       k.scale(2),
         k.body({ isStatic: true }), // เป็นกำแพงที่เดินผ่านไม่ได้ในตอนแรก
         k.offscreen({ hide: true }),
         "door", // Tag สำหรับอ้างอิง

@@ -13,6 +13,7 @@ import { makeSwitch } from "../entities/switch";
 import { makeKey } from "../entities/key";
 
 
+
 export function room3(k,room3Data,previousSceneData) {
 state.currentRoom = "room3";
 state.set(statePropsEnum.lastRoom, "room3");
@@ -140,6 +141,9 @@ for (const position of positions) {
                 
                 continue;
             }
+    if (position.name === "cartridge"){
+            map.add(makeCartridge(k,k.vec2(position.x,position.y)));
+        }
     if (position.name === "switch") {
                         // รอให้ Loop ทำงานไปเรื่อยๆ จนเจอ door ก่อน หรือใช้ k.onUpdate
                         // แต่ทางที่ปลอดภัยที่สุดคือสร้าง Switch หลังจาก Loop ประตูเสร็จ
@@ -149,9 +153,10 @@ for (const position of positions) {
                       
                         continue;
                     }
+                    
 
     
-    // ... (เงื่อนไขอื่นๆ เช่น spawn boss หรือ drone)
+
     
     
 }

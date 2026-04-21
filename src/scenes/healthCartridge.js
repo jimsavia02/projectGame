@@ -10,7 +10,7 @@ export function makeCartridge(k, pos) {
   ]);
 
   cartridge.onCollide("player", (player) => {
-    k.play("health", { volume: 0.2 });
+    // k.play("health", { volume: 0.2 });
     if (player.hp() < state.current().maxPlayerHp) {
       player.heal(1);
     }

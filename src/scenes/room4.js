@@ -60,6 +60,7 @@ state.set(statePropsEnum.lastRoom, "room4");
            if (layer.name === "spikes" && layer.objects) {
                 spikes.push(...layer.objects);
             }
+            
        }
 
          setMapColliders(k, map, colliders);
@@ -181,6 +182,9 @@ for (const position of positions) {
         if (position.name === "npc2") {
             const npc2 = makeNPC2(k, player, position.x, position.y, destroyBarrier4);
             continue;
+        }
+        if (position.name === "cartridge"){
+            map.add(makeCartridge(k,k.vec2(position.x,position.y)));
         }
 }
 
