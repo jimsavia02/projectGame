@@ -895,19 +895,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":216,
-                 "name":"",
-                 "opacity":1,
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1380,
-                 "y":622.333333333333
-                }, 
-                {
-                 "height":0,
                  "id":222,
                  "name":"door",
                  "opacity":1,
@@ -2302,7 +2289,7 @@
                  "y":0
                 }, 
                 {
-                 "height":176,
+                 "height":80.5,
                  "id":154,
                  "name":"exit-5",
                  "opacity":1,
@@ -2310,8 +2297,8 @@
                  "type":"",
                  "visible":true,
                  "width":8,
-                 "x":1280,
-                 "y":0
+                 "x":1278,
+                 "y":560
                 }],
          "opacity":1,
          "type":"objectgroup",
