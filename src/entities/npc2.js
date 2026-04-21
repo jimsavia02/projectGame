@@ -7,9 +7,9 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
 
   const npc2 = k.add([
     k.pos(x, y),
-    k.sprite("npc"),
+    k.sprite("npc2"),
     k.anchor("center"),
-    k.area({ shape: new k.Rect(k.vec2(0, 10), 20, 12) }),
+    k.area({ shape: new k.Rect(k.vec2(0, 0), 20, 12) }),
     k.body(), 
     k.scale(2),
     "npc2"

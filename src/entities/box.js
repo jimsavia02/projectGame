@@ -3,7 +3,7 @@ export function makeBox(k, initialPos) {
     k.pos(initialPos),
     k.sprite("Box"),
     k.anchor("center"),
-    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16),collisionIgnore: ["enemy1"] }),
+    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16), collisionIgnore: ["enemy1", "player"] }),
     k.body({ isStatic: false, mass: 100 }),
     k.scale(1),
     k.health(5),

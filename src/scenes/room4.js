@@ -21,7 +21,7 @@ export function room4(k,room4Data,previousSceneData) {
 state.currentRoom = "room4";
 state.set(statePropsEnum.lastRoom, "room4");
    
-   k.camScale(3),
+   k.camScale(1),
    k.camPos(1280,720);
    k.setGravity(1000);
     
