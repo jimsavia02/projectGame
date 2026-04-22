@@ -1206,6 +1206,30 @@
                  "width":336.5,
                  "x":335,
                  "y":564.5
+                }, 
+                {
+                 "height":26,
+                 "id":81,
+                 "name":"",
+                 "opacity":1,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":644,
+                 "x":848,
+                 "y":644
+                }, 
+                {
+                 "height":26,
+                 "id":82,
+                 "name":"",
+                 "opacity":1,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":446,
+                 "x":1780,
+                 "y":646
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1282,17 +1306,56 @@
                  "width":0,
                  "x":2848.5,
                  "y":416
+                }, 
+                {
+                 "height":0,
+                 "id":73,
+                 "name":"respawn",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":51,
+                 "y":494.5
+                }, 
+                {
+                 "height":0,
+                 "id":78,
+                 "name":"entrance-6",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":31.3333333333333,
+                 "y":494.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":79,
+                 "name":"player",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":72,
+                 "y":494
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":31,
-         "name":"collders",
+         "name":"colliders",
          "objects":[
                 {
                  "height":159.666666666667,
@@ -1917,9 +1980,44 @@
          "visible":false,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":34,
+         "name":"exit",
+         "objects":[
+                {
+                 "height":162,
+                 "id":72,
+                 "name":"exit-5",
+                 "opacity":1,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8.66666666666652,
+                 "x":3038.66666666667,
+                 "y":0
+                }, 
+                {
+                 "height":80,
+                 "id":74,
+                 "name":"exit-4",
+                 "opacity":1,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":13,
+                 "x":-13,
+                 "y":431
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":34,
- "nextobjectid":72,
+ "nextlayerid":35,
+ "nextobjectid":84,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.1",

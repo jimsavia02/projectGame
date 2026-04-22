@@ -45,7 +45,6 @@ state.set(statePropsEnum.lastRoom, "room4");
        for (const layer of roomLayers) {
            if (layer.name === "cameras"){
                cameras.push(...layer.objects);
-   
            }
    
            if (layer.name === "positions") {
@@ -191,6 +190,9 @@ for (const position of positions) {
         }
 }
 
+k.go("room6", {
+  exitName: "exit-6"
+});
 
 // 🔥 ต้องอยู่นอก loop เท่านั้น
 if (!spawned) {
