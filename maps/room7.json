@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"room7.json"
+        }
+    },
  "height":50,
  "infinite":false,
  "layers":[
@@ -467,8 +475,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":156.484848484848,
-                 "y":547.878787878788
+                 "x":640.484848484848,
+                 "y":429.878787878788
                 }, 
                 {
                  "height":0,
@@ -480,8 +488,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":114.666666666667,
-                 "y":548
+                 "x":642.666666666667,
+                 "y":428
                 }, 
                 {
                  "height":0,
@@ -493,12 +501,103 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":58.6666666666667,
-                 "y":548
+                 "x":639.666666666667,
+                 "y":426
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"enemy2",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":492.771892733949,
+                 "y":562.499054189385
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"enemy2",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":692.80560810059,
+                 "y":556.92333370424
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"enemy2",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":414.768220763325,
+                 "y":564.196172248804
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"enemy2",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":765,
+                 "y":560
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"enemy1",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":579,
+                 "y":561
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"cartridge",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":136,
+                 "y":556
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"cartridge",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1206,
+                 "y":558
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -509,12 +608,12 @@
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":9,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.1",

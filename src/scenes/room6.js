@@ -8,7 +8,7 @@ import { createInventory } from "../ui/inventory.js";
 import { loadSpikes, setupSpikeDamage } from "../entities/spike.js";
 import { makeKey } from "../entities/key";
 import { makeEnemy2 } from "../entities/enemy2";
-import { makeNPC } from "../entities/npc"
+import { makeNPC3 } from "../entities/npc3"
 import { makeNPC2 } from "../entities/npc2"
 import { makeCartridge } from "./healthCartridge";
 import { makeBoss } from "../entities/Boss";
@@ -19,9 +19,9 @@ state.set("playerHp", state.current().maxPlayerHp);
 state.set("playerMana", 6);
 state.currentRoom = "room6";
 state.set(statePropsEnum.lastRoom, "room6");
-   k.camScale(2),
+   k.camScale(3),
    k.camPos(1280,720);
-   k.setGravity(1200);
+   k.setGravity(800);
 
     const roomLayers = room6Data.layers;
     const colliders = [];
@@ -113,8 +113,8 @@ for (const position of positions) {
         continue;
     }
 
-    if (position.name === "npc") {
-        const npc = makeNPC(k, player, position.x, position.y);
+    if (position.name === "npc3") {
+        const npc = makeNPC3(k, player, position.x, position.y);
         continue;
     }
     if (position.name === "cartridge"){

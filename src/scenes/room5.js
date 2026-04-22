@@ -19,7 +19,7 @@ state.set("playerHp", state.current().maxPlayerHp);
 state.set("playerMana", 6);
 state.currentRoom = "room5";
 state.set(statePropsEnum.lastRoom, "room5");
-   k.camScale(2),
+   k.camScale(3),
    k.camPos(1280,720);
    k.setGravity(1000);
 

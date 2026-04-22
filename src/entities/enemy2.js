@@ -165,6 +165,7 @@ export function makeEnemy2(k, initialPos, makeBox) {
 
         this.onAnimEnd((anim) => {
           if (anim === "explode") k.destroy(this);
+          if (anim === "death") k.destroy(this);
 
           if (anim.includes("attack")) {
             this.isAttacking = false;

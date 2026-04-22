@@ -126,6 +126,15 @@ k.loadSprite("npc","./assets/sprites/Orc.png",
   }
      });
 
+k.loadSprite("werebear","./assets/sprites/Werebear.png", 
+    {sliceX:13,
+        sliceY:7,
+        anims: {
+    idle: { from: 0, to: 5, loop: true },
+    
+  }
+     });
+
 k.loadSprite("npc2","./assets/sprites/Werewolf.png", 
     {sliceX:13,
         sliceY:6,

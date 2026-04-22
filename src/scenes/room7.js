@@ -19,7 +19,7 @@ state.set("playerHp", state.current().maxPlayerHp);
 state.set("playerMana", 6);
 state.currentRoom = "room7";
 state.set(statePropsEnum.lastRoom, "room7");
-   k.camScale(2),
+   k.camScale(2.5),
    k.camPos(1280,720);
    k.setGravity(1000);
 
@@ -152,6 +152,23 @@ for (const position of positions) {
       manaBar.setEvents();
       k.add(manaBar);
       manaBar.trigger("update");
+
+
+      let endingTriggered = false;
+
+    k.onUpdate(() => {
+    if (endingTriggered) return;
+
+    const enemy2Left = k.get("enemy2");
+
+    if (enemy2Left.length === 0) {
+        endingTriggered = true;
+
+        k.wait(0.5, () => {
+        k.go("ending");
+        });
+    }
+    });
     
       // 🔥 cleanup
       k.onSceneLeave(() => {

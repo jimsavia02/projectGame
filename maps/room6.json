@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"room6.json"
+        }
+    },
  "height":42,
  "infinite":false,
  "layers":[
@@ -1245,15 +1253,15 @@
                 {
                  "height":0,
                  "id":64,
-                 "name":"npc",
+                 "name":"npc3",
                  "opacity":1,
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":257,
-                 "y":195
+                 "x":260.333333333333,
+                 "y":207.666666666667
                 }, 
                 {
                  "height":0,
@@ -1348,7 +1356,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
