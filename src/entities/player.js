@@ -9,7 +9,7 @@ export function makePlayer(k) {
     k.scale(1.5),
     k.sprite("player"),
     k.z(10),
-    k.area({ shape: new k.Rect(k.vec2(0, 1), 10, 20), collisionIgnore: ["npc"] }),
+    k.area({ shape: new k.Rect(k.vec2(0, 1), 10, 20), collisionIgnore: ["npc", "npc2"] }),
     k.anchor("center"),
     k.body({ mass: 100, jumpForce: 400 }),
     k.doubleJump(state.current().isDoubleJumpUnlocked ? 2 : 1),

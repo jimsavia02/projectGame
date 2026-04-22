@@ -3,7 +3,7 @@ export function makeKey(k, initialPos) {
     k.pos(initialPos),
     k.sprite("key"),
     k.anchor("center"),
-    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16), collisionIgnore: ["sword-hitbox", "player-skill", "enemy-attack-hitbox", "fire-hitbox", "bossAttackHitbox", "player", "npc"] }),
+    k.area({ shape: new k.Rect(k.vec2(0, 0), 16, 16), collisionIgnore: ["sword-hitbox", "player-skill", "enemy-attack-hitbox", "fire-hitbox", "bossAttackHitbox", "player", "npc","enemy1","enemy2","npc2"] }),
     k.body({ isStatic: false, mass: 100 }),
     k.scale(),
      k.z(10),

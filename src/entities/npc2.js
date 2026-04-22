@@ -10,7 +10,6 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
     k.sprite("npc2"),
     k.anchor("center"),
     k.area({ shape: new k.Rect(k.vec2(0, 0), 20, 12) }),
-    k.body(), 
     k.scale(2),
     "npc2"
   ]);
@@ -76,8 +75,8 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
     } else {
       // ✅ ถ้าผู้เล่นมี key แล้ว
       const completeDialogs = [
-        "ขอบคุณ!",
-        "ประตูเปิดแล้ว"
+        "Thankyou",
+        "Door is opened"
       ];
 
       if (dialogIndex < completeDialogs.length) {
@@ -129,7 +128,7 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
       nextDialog();
     } else if (!hasKeyInHand && !hasReceivedKey) {
       // ✅ ยังไม่มี key ในมือ
-      content.text = "คุณยังไม่มีกุญแจ!";
+      content.text = "you dont have a key!";
       isTalking = true;
       dialogBox.opacity = 0.9;
       k.wait(2, () => {
