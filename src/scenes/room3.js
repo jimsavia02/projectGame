@@ -11,6 +11,7 @@ import { manaBar } from "../ui/manaBar";
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 import { makeKey } from "../entities/key";
+import { createInventory } from "../ui/inventory.js";
 
 
 
@@ -183,5 +184,24 @@ for (const position of positions) {
         player.walkSound.stop();
         player.walkSound = null;
         }
+    });
+
+    // ✅ Setup Inventory System
+    const inventory = createInventory(k, player, makeKey);
+    
+    k.onKeyDown("i", () => {
+      inventory.toggle();
+    });
+
+    k.onKeyDown("up", () => {
+      inventory.selectUp();
+    });
+
+    k.onKeyDown("down", () => {
+      inventory.selectDown();
+    });
+
+    k.onKeyDown("v", () => {
+      inventory.drop();
     });
 }

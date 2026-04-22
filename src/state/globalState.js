@@ -7,6 +7,7 @@ export const statePropsEnum = {
     playerInBossFight: "playerInBossFight",
     isBossDefeated: "isBossDefeated",
     lastRoom: "lastRoom",
+    inventoryItems: "inventoryItems",
 };
 
 
@@ -20,6 +21,7 @@ function initStateManager() {
         playerInBossFight: false,
         isBossDefeated: false,
         lastRoom: "room3",
+        inventoryItems: [],
     };
 
     return {

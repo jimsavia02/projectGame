@@ -15,6 +15,7 @@ import { makeBox } from "../entities/Box";
 import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 import { makeKey } from "../entities/key";
 import { makeEnemy2 } from "../entities/enemy2";
+import { createInventory } from "../ui/inventory.js";
 
 
 export function room4(k,room4Data,previousSceneData) {
@@ -217,5 +218,24 @@ checkEnemy2AndRemoveBarrier3(k);
         player.walkSound.stop();
         player.walkSound = null;
         }
+    });
+
+    // ✅ Setup Inventory System
+    const inventory = createInventory(k, player, makeKey);
+    
+    k.onKeyDown("i", () => {
+      inventory.toggle();
+    });
+
+    k.onKeyDown("up", () => {
+      inventory.selectUp();
+    });
+
+    k.onKeyDown("down", () => {
+      inventory.selectDown();
+    });
+
+    k.onKeyDown("v", () => {
+      inventory.drop();
     });
 }

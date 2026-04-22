@@ -12,6 +12,8 @@ import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
 import { makeEnemy2 } from "../entities/enemy2";
+import { createInventory } from "../ui/inventory.js";
+import { makeKey } from "../entities/key";
 
 export function room5(k, room5Data, previousSceneData) {
 state.set("playerHp", state.current().maxPlayerHp);
@@ -197,6 +199,25 @@ state.set(statePropsEnum.lastRoom, "room5");
   healthBar.setEvents();
   healthBar.trigger("update");
   k.add(healthBar);
+
+  // ✅ Setup Inventory System
+  const inventory = createInventory(k, player, makeKey);
+  
+  k.onKeyDown("i", () => {
+    inventory.toggle();
+  });
+
+  k.onKeyDown("up", () => {
+    inventory.selectUp();
+  });
+
+  k.onKeyDown("down", () => {
+    inventory.selectDown();
+  });
+
+  k.onKeyDown("v", () => {
+    inventory.drop();
+  });
 
   manaBar.setEvents();
   k.add(manaBar);

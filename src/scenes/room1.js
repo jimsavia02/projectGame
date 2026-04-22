@@ -1,4 +1,4 @@
-import { makeBoss } from "../entities/enemyBoss";
+
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
 import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones} from "./roomutils";
@@ -6,6 +6,9 @@ import { state } from "../state/globalState";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { makeNPC } from "../entities/npc";
+import { createInventory } from "../ui/inventory.js";
+import { makeKey } from "../entities/key";
+
 
 export function room1(k, roomData,previousSceneData) {
 
@@ -106,12 +109,6 @@ export function room1(k, roomData,previousSceneData) {
             continue;
         }
 
-        if(position.name ==="boss" && !state.current().isBossDefeated){
-            const boss = k.add(makeBoss(k,k.vec2(position.x,position.y)));
-            boss.setBehavior();
-            boss.setEvents();
-            continue;
-        }
         
         if (position.name === "cartridge"){
             map.add(makeCartridge(k,k.vec2(position.x,position.y)));
@@ -139,4 +136,22 @@ export function room1(k, roomData,previousSceneData) {
        healthBar.trigger("update");
        k.add(healthBar);
 
+       // ✅ Setup Inventory System
+       const inventory = createInventory(k, player, makeKey);
+       
+       k.onKeyDown("i", () => {
+         inventory.toggle();
+       });
+
+       k.onKeyDown("up", () => {
+         inventory.selectUp();
+       });
+
+       k.onKeyDown("down", () => {
+         inventory.selectDown();
+       });
+
+       k.onKeyDown("v", () => {
+         inventory.drop();
+       });
 }

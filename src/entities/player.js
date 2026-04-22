@@ -208,6 +208,22 @@ export function makePlayer(k) {
               nearest.isGrabbed = true;
               nearest.grabber = this;
               nearest.body?.pause?.();
+              
+              // ✅ Add to inventory if it's a key
+              if (nearest.name === "key" || nearest.is("key")) {
+                const currentInventory = state.current().inventoryItems || [];
+                const existingKey = currentInventory.find(item => item.name === "Key");
+                if (existingKey) {
+                  existingKey.count++;
+                } else {
+                  currentInventory.push({ name: "Key", count: 1 });
+                }
+                state.set("inventoryItems", currentInventory);
+                
+                // ✅ Destroy the key from the map
+                k.destroy(nearest);
+                this.grabTarget = null;
+              }
             }
           } else {
             if (this.grabTarget && this.grabTarget.exists()) {

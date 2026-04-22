@@ -3,6 +3,8 @@ import { makePlayer } from "../entities/player";
 import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import {  setBackgroundImage, setCameraZones, setMapColliders,setCameraControls,setExitZones} from "./roomutils";
+import { createInventory } from "../ui/inventory.js";
+import { makeKey } from "../entities/key";
 
 export function room2(k,room2Data,previousSceneData) {
    setBackgroundImage(k, "bgroom1");
@@ -84,4 +86,23 @@ export function room2(k,room2Data,previousSceneData) {
           healthBar.setEvents();
           healthBar.trigger("update");
           k.add(healthBar);
+
+          // ✅ Setup Inventory System
+          const inventory = createInventory(k, player, makeKey);
+          
+          k.onKeyDown("i", () => {
+            inventory.toggle();
+          });
+
+          k.onKeyDown("up", () => {
+            inventory.selectUp();
+          });
+
+          k.onKeyDown("down", () => {
+            inventory.selectDown();
+          });
+
+          k.onKeyDown("v", () => {
+            inventory.drop();
+          });
    }

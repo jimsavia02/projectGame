@@ -1,9 +1,11 @@
+import { state } from "../state/globalState.js";
+
 export function makeNPC2(k, player, x, y, onKeyReceived) {
   let canTalk = false;
   let dialogIndex = 0;
   let isTalking = false;
   let hasReceivedKey = false;
-  let canPressE = true; // ✅ Cooldown สำหรับการกด E
+  let canPressE = true;
 
   const npc2 = k.add([
     k.pos(x, y),
@@ -45,7 +47,7 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
     } else {
       canTalk = false;
       isTalking = false;
-      canPressE = true; // ✅ รีเซ็ต cooldown เมื่อผู้เล่นเดินหนี
+      canPressE = true;
       dialogBox.opacity = 0;
       dialogIndex = 0;
       content.text = "";
@@ -56,7 +58,6 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
   function nextDialog() {
     dialogBox.opacity = 0.9;
 
-    // ✅ ถ้าผู้เล่นยังไม่มี key
     if (!hasReceivedKey) {
       const dialogs = [
         "นายช่วยฉันหน่อย!",
@@ -73,10 +74,9 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
         content.text = "";
       }
     } else {
-      // ✅ ถ้าผู้เล่นมี key แล้ว
       const completeDialogs = [
-        "Thankyou",
-        "Door is opened"
+        "Thank you!",
+        "The door is now open."
       ];
 
       if (dialogIndex < completeDialogs.length) {
@@ -88,47 +88,41 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
         content.text = "";
       }
     }
-    
-    // ✅ รีเซ็ต isTalking ให้สามารถกด E ได้ต่อไป
     isTalking = false;
   }
 
-  // --- 4. Key Receive Logic ---
+  // --- 4. Key Receive Logic (ส่วนที่แก้ไข) ---
   function receiveKey() {
-    // ✅ เช็คว่าผู้เล่นถือ key หรือไม่
-    const keys = k.get("key");
-    let hasKeyInHand = false;
+    const inventoryItems = state.current().inventoryItems || [];
+    // ค้นหาตำแหน่งกุญแจ
+    const keyIndex = inventoryItems.findIndex(item => item.name === "Key" && item.count > 0);
 
-    for (const keyEntity of keys) {
-      if (keyEntity.isGrabbed && keyEntity.grabber === player) {
-        hasKeyInHand = true;
-        break;
-      }
-    }
-
-    if (hasKeyInHand && !hasReceivedKey) {
+    if (keyIndex !== -1 && !hasReceivedKey) {
       hasReceivedKey = true;
       dialogIndex = 0;
       
-      // ✅ ลบ key ออกจากมือ player
-      for (const keyEntity of keys) {
-        if (keyEntity.isGrabbed && keyEntity.grabber === player) {
-          keyEntity.isGrabbed = false;
-          keyEntity.grabber = null;
-          k.destroy(keyEntity);
-          break;
-        }
+      // Clone array เพื่ออัปเดต state อย่างปลอดภัย
+      const updatedInventory = JSON.parse(JSON.stringify(inventoryItems));
+      
+      // ลดจำนวนกุญแจ
+      updatedInventory[keyIndex].count--;
+      
+      // ถ้าหมดให้ลบออกจากช่อง
+      if (updatedInventory[keyIndex].count <= 0) {
+        updatedInventory.splice(keyIndex, 1);
       }
 
-      // ✅ เรียก callback เพื่อทำลาย barrier4
+      // บันทึกค่าใหม่ลง Global State
+      state.set("inventoryItems", updatedInventory);
+
+      // เรียก callback เพื่อทำลาย barrier4 (โค้ดทำลาย barrier อยู่ใน main scene)
       if (onKeyReceived) {
         onKeyReceived();
       }
 
       nextDialog();
-    } else if (!hasKeyInHand && !hasReceivedKey) {
-      // ✅ ยังไม่มี key ในมือ
-      content.text = "you dont have a key!";
+    } else if (keyIndex === -1 && !hasReceivedKey) {
+      content.text = "You don't have a key!";
       isTalking = true;
       dialogBox.opacity = 0.9;
       k.wait(2, () => {
@@ -139,26 +133,22 @@ export function makeNPC2(k, player, x, y, onKeyReceived) {
   }
 
   // --- 5. E Key Press Handler ---
-  k.onKeyDown("e", () => {
-    if (!canTalk || !canPressE) return; // ✅ ตรวจสอบ cooldown
+  k.onKeyPress("e", () => { // แนะนำใช้ onKeyPress แทน onKeyDown เพื่อป้องกันการกดค้างแล้วรัว
+    if (!canTalk || !canPressE) return;
 
-    canPressE = false; // ✅ ปิด input ชั่วคราว
+    canPressE = false;
     
-    // ✅ ถ้ายังไม่ได้รับ key ให้ตรวจสอบว่ามี key ไหม
     if (!hasReceivedKey) {
       receiveKey();
     } else {
-      // ✅ ถ้าได้ key แล้ว ให้ปรอท
       nextDialog();
     }
 
-    // ✅ รอ 0.5 วินาที แล้วปลดล็อค E
     k.wait(0.5, () => {
       canPressE = true;
     });
   });
 
-  // --- 6. Interaction Function ---
   npc2.tryGiveKey = function() {
     receiveKey();
   };
