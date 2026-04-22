@@ -14,11 +14,16 @@ import { makeCartridge } from "./healthCartridge";
 import { makeBoss } from "../entities/Boss";
 import { makeDrone } from "../entities/enemyDrone";
 
-export function room6(k, mapData, previousSceneData) {
+export function room6(k, room6Data, previousSceneData) {
+state.set("playerHp", state.current().maxPlayerHp);
+state.set("playerMana", 6);
+state.currentRoom = "room6";
+state.set(statePropsEnum.lastRoom, "room6");
+   k.camScale(2),
+   k.camPos(1280,720);
+   k.setGravity(1200);
 
-    k.setGravity(1200);
-
-    const roomLayers = mapData.layers;
+    const roomLayers = room6Data.layers;
     const colliders = [];
     const cameras = [];
     const exits = [];
@@ -36,7 +41,7 @@ export function room6(k, mapData, previousSceneData) {
     player.currentRoom = "room6";
     state.set(statePropsEnum.lastRoom, "room6");
 
-for (const layer of mapData.layers) {
+for (const layer of room6Data.layers) {
 
     if (layer.name === "colliders") {
         colliders.push(...layer.objects);
@@ -59,7 +64,7 @@ for (const layer of mapData.layers) {
 }
     setMapColliders(k, map, colliders);
     setCameraZones(k, map, cameras);
-    setCameraControls(k, player, map, mapData);
+    setCameraControls(k, player, map, room6Data);
     setExitZones(k, map, exits);
     loadSpikes(k, map, spikes);
     setupSpikeDamage(k);

@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"room4.json"
+        }
+    },
  "height":50,
  "infinite":false,
  "layers":[
@@ -799,7 +807,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":75,
+                 "x":49.6666666666667,
                  "y":130
                 }, 
                 {
@@ -2182,7 +2190,7 @@
                  "visible":true,
                  "width":16,
                  "x":1168,
-                 "y":560
+                 "y":559
                 }, 
                 {
                  "height":80,
@@ -2198,7 +2206,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2315,7 +2323,7 @@
                  "y":0
                 }, 
                 {
-                 "height":80.5,
+                 "height":108.5,
                  "id":154,
                  "name":"exit-6",
                  "opacity":1,
@@ -2323,8 +2331,8 @@
                  "type":"",
                  "visible":true,
                  "width":8,
-                 "x":1278,
-                 "y":560
+                 "x":1280.33333333333,
+                 "y":546.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",

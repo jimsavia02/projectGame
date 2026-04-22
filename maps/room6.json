@@ -1348,7 +1348,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1984,10 +1984,10 @@
         {
          "draworder":"topdown",
          "id":34,
-         "name":"exit",
+         "name":"exits",
          "objects":[
                 {
-                 "height":162,
+                 "height":173,
                  "id":72,
                  "name":"exit-5",
                  "opacity":1,
@@ -1995,20 +1995,8 @@
                  "type":"",
                  "visible":true,
                  "width":8.66666666666652,
-                 "x":3038.66666666667,
-                 "y":0
-                }, 
-                {
-                 "height":80,
-                 "id":74,
-                 "name":"exit-4",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":13,
-                 "x":-13,
-                 "y":431
+                 "x":3037.9393939394,
+                 "y":0.0909090909090935
                 }],
          "opacity":1,
          "type":"objectgroup",

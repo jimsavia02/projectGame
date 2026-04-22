@@ -14,11 +14,11 @@ import { makeCartridge } from "./healthCartridge";
 import { makeBoss } from "../entities/Boss";
 import { makeDrone } from "../entities/enemyDrone";
 
-export function room5(k, mapData, previousSceneData) {
+export function room7(k, mapData, previousSceneData) {
 state.set("playerHp", state.current().maxPlayerHp);
 state.set("playerMana", 6);
-state.currentRoom = "room5";
-state.set(statePropsEnum.lastRoom, "room5");
+state.currentRoom = "room7";
+state.set(statePropsEnum.lastRoom, "room7");
    k.camScale(2),
    k.camPos(1280,720);
    k.setGravity(1000);
@@ -31,15 +31,15 @@ state.set(statePropsEnum.lastRoom, "room5");
     const spikes = [];
 
     const map = k.add([
-        k.sprite("room5"),
+        k.sprite("room7"),
         k.pos(0, 0),
     ]);
 
     const player = k.add(makePlayer(k));
     player.setControl();
 
-    player.currentRoom = "room5";
-    state.set(statePropsEnum.lastRoom, "room5");
+    player.currentRoom = "room7";
+    state.set(statePropsEnum.lastRoom, "room7");
 
 for (const layer of mapData.layers) {
 
@@ -75,10 +75,10 @@ for (const layer of mapData.layers) {
 for (const position of positions) {
 
     if (
-        position.name.includes("entrance-5") &&
-        previousSceneData?.exitName?.includes("exit-5")
+        position.name.includes("entrance-7") &&
+        previousSceneData?.exitName?.includes("exit-7")
     ) {
-        console.log("✅ spawn entrance-5");
+        console.log("✅ spawn entrance-7");
         player.setPosition(position.x, position.y);
         spawned = true;
         continue;
@@ -104,9 +104,9 @@ for (const position of positions) {
 
     if (position.name === "enemy2") {
 
-      const enemy2 = k.add(
-          makeEnemy2(k, k.vec2(position.x, position.y), makeBox)
-      );
+        const enemy2 = k.add(
+            makeEnemy2(k, k.vec2(position.x, position.y), makeBox)
+        );
 
         enemy2.setBehavior();
         enemy2.setEvents();
@@ -119,13 +119,6 @@ for (const position of positions) {
     }
     if (position.name === "cartridge"){
         map.add(makeCartridge(k,k.vec2(position.x,position.y)));
-    }
-    if (position.name === "key") {
-
-        const Tree = k.add(
-          makeKey(k, k.vec2(position.x, position.y))
-        );
-        continue;
     }
 }
 

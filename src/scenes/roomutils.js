@@ -370,11 +370,6 @@ export function setExitZones(k,map,exits,){
       }
 
       const targetRoom = exit.name.replace("exit-", "room");
-      
-      if (exit.name === "exit-6") {
-        k.go("ending");
-        return;
-      }
   
 k.go(targetRoom, {
   exitName: exit.name,

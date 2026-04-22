@@ -246,6 +246,8 @@ k.loadSprite("room3","./maps/room3.png");
 k.loadSprite("room4","./maps/room4.png");
 k.loadSprite("room5", "maps/room5.png");
 k.loadSprite("room6", "maps/room6.png");
+k.loadSprite("room7", "maps/room7.png");
+
 k.loadJSON("room5Data", "maps/room5.json");
 k.loadJSON("room6Data", "maps/room6.json");
 
