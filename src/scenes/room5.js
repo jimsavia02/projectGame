@@ -2,14 +2,16 @@ import { makeBoss } from "../entities/enemyBoss";
 import { makeDrone } from "../entities/enemyDrone";
 import { makePlayer } from "../entities/player";
 import { state, statePropsEnum } from "../state/globalState";
-import { setCameraZones, setMapColliders, setCameraControls, setExitZones } from "./roomutils";
-import { makeNPC } from "../entities/npc";
+import { setBackgroundImage, setCameraZones, setMapColliders,setCameraControls, setExitZones,} from "./roomutils";
+import { checkEnemy2AndRemoveBarrier5 } from "./roomutils";
 import { makeBox } from "../entities/Box";
+import { makeCartridge } from "./healthCartridge";
 import { healthBar } from "../ui/healthBar";
 import { manaBar } from "../ui/manaBar";
 import { loadSpikes, setupSpikeDamage } from "../entities/spike";
 import { makeDoor } from "../entities/door"
 import { makeSwitch } from "../entities/switch";
+import { makeEnemy2 } from "../entities/enemy2";
 
 export function room5(k, room5Data, previousSceneData) {
 state.set("playerHp", state.current().maxPlayerHp);
@@ -29,6 +31,8 @@ state.set(statePropsEnum.lastRoom, "room5");
   const cameras = [];
   const exits = [];
   const spikes = [];
+
+  const destroyBarrier5 = checkEnemy2AndRemoveBarrier5(k);
 
   // 🔥 อ่าน layer จาก Tiled
   for (const layer of roomLayers) {
@@ -53,6 +57,7 @@ state.set(statePropsEnum.lastRoom, "room5");
     if (layer.name === "spikes" && layer.objects) {
       spikes.push(...layer.objects);
     }
+    
   }
 
   // 🔥 สร้าง collider
@@ -124,6 +129,10 @@ state.set(statePropsEnum.lastRoom, "room5");
       continue;
     }
 
+    if (position.name === "cartridge"){
+        map.add(makeCartridge(k,k.vec2(position.x,position.y)));
+    }
+
     // 🔥 NPC
     if (position.name === "npc") {
       makeNPC(
@@ -149,6 +158,7 @@ state.set(statePropsEnum.lastRoom, "room5");
       }
       continue;
     }
+    
       // door
      if (position.name === "door") {
             // สร้าง object ประตูขึ้นมา
@@ -168,9 +178,20 @@ state.set(statePropsEnum.lastRoom, "room5");
                
                  continue;
       }
-        
 
+              if (position.name === "enemy2") {
+      
+                  const enemy2 = k.add(
+                      makeEnemy2(k, k.vec2(position.x, position.y), makeBox)
+                  );
+      
+                  enemy2.setBehavior();
+                  enemy2.setEvents();
+                  continue;
+              }
   }
+
+  checkEnemy2AndRemoveBarrier5(k);
 
   // 🔥 UI
   healthBar.setEvents();

@@ -1183,32 +1183,6 @@
                  "width":0,
                  "x":423.5,
                  "y":108.75
-                }, 
-                {
-                 "height":0,
-                 "id":191,
-                 "name":"enemy1",
-                 "opacity":1,
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":568.666666666667,
-                 "y":100
-                }, 
-                {
-                 "height":0,
-                 "id":192,
-                 "name":"enemy1",
-                 "opacity":1,
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1134.66666666667,
-                 "y":176
                 }],
          "opacity":1,
          "type":"objectgroup",
