@@ -228,6 +228,7 @@ k.loadSprite("bgroom1", "assets/sprites/bts.png");
 k.loadSprite("logo","assets/sprites/startmanu.png");
 k.loadSprite("alert","assets/alert.png")
 
+k.loadSound("endingMusic","assets/sounds/ending_isan.mp3");
 
 k.loadSound("boom", "assets/sounds/boom.wav");
 k.loadSound("flamethrower", "assets/sounds/flamethrower.wav");

@@ -6,8 +6,8 @@ import { room2 } from "./scenes/room2.js"
 import { room3 } from "./scenes/room3.js"
 import { room4 } from "./scenes/room4.js"
 import { room5 } from "./scenes/room5.js"
-import { intro } from "./scenes/intro.js";
-
+import { intro } from "./scenes/intro.js"
+import { ending } from "./scenes/ending.js";
 
 async function main() {
   const room1Data = await (await fetch("./maps/room1.json")).json();
@@ -16,6 +16,7 @@ async function main() {
   const room4Data = await (await fetch("./maps/room4.json")).json();
   const room5Data = await (await fetch("./maps/room5.json")).json();
 
+    ending(k);
     k.scene("intro", (previousSceneData) => {
     intro(k, previousSceneData);
     });
@@ -44,9 +45,8 @@ k.scene("room5", (previousSceneData) => {
 });
 
 
-k.go("room3");
+k.go("intro");
 }
 
 main();
-
 
